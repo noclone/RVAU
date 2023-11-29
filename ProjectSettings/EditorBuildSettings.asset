@@ -4,5 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/WaitingRoom.unity
+    guid: 75b8405ed30565c4f8db50eef6c1ad7e
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: ff826318fb2eb4f4bb6b07fa25f22cbb
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a498e9d6233fe2342a62abc995d4334b, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 6b7f35c8953d77448a8df983b12b0d0c, type: 2}
