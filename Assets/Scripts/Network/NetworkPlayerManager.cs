@@ -9,13 +9,13 @@ public class NetworkPlayerManager : MonoBehaviourPun
     public GameObject spawnPoint2;
     void Start()
     {
-        Vector3 spawnPoint = Vector3.zero;
-        Debug.Log(PhotonNetwork.LocalPlayer.ActorNumber);
-        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
-            spawnPoint = spawnPoint1.transform.position;
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
+        {
+            PhotonNetwork.Instantiate("Player", spawnPoint1.transform.position, Quaternion.identity);
+        }
         else
-            spawnPoint = spawnPoint2.transform.position;
-        Debug.Log(spawnPoint);
-        PhotonNetwork.Instantiate("Player", spawnPoint, Quaternion.identity);
+        {
+            PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
+        }
     }
 }
