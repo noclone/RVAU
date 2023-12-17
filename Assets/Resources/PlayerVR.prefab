@@ -1100,6 +1100,7 @@ GameObject:
   - component: {fileID: 1533997027550105266}
   - component: {fileID: 1087113839177213659}
   - component: {fileID: 2323312784689083689}
+  - component: {fileID: 2845452805255459744}
   m_Layer: 0
   m_Name: PlayerVR
   m_TagString: Untagged
@@ -1194,3 +1195,15 @@ MonoBehaviour:
   walkingSpeed: 5
   rotationSpeed: 5
   camera: {fileID: 4169341553028026208}
+--- !u!114 &2845452805255459744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6326010797563485039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d24e0cfc5461a5459b209b4649056a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

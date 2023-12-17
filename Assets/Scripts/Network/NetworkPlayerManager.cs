@@ -9,7 +9,7 @@ public class NetworkPlayerManager : MonoBehaviourPun
     public GameObject spawnPoint2;
     void Start()
     {
-        if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
             PhotonNetwork.Instantiate("Player", spawnPoint1.transform.position, Quaternion.identity);
         }
