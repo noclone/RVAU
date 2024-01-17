@@ -32,5 +32,6 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("GroundSection", Vector3.zero, Quaternion.identity);
     }
 }
