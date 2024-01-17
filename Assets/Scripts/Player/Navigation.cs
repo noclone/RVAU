@@ -5,6 +5,7 @@ public class Navigation : MonoBehaviour
     public float walkingSpeed = 5.0f;
     public float sideShiftSpeed = 5.0f;
     public float sideShiftDistance = 3.0f; // Distance à parcourir lors du déplacement latéral
+    public Camera camera;
 
     // -1: left, 0: middle, 1: right
     private int currentLane = 0;
