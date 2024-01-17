@@ -1193,9 +1193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30105f2559d2b14da2edbf65f4a1b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 0
+  walkingSpeed: 2
   sideShiftSpeed: 5
-  rb: {fileID: 0}
   sideShiftDistance: 3
   camera: {fileID: 4169341553028026208}
 --- !u!114 &2845452805255459744

@@ -19,27 +19,41 @@ public class Navigation : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.forward * (Time.deltaTime * walkingSpeed));
+        print(transform.position);
+        print(targetPosition);
+        MoveForward();
 
-        if (Input.GetKeyDown(KeyCode.A) && currentLane >= 0)
+        if (Input.GetKeyDown(KeyCode.A) && currentLane >= -1)
         {
             MoveToLane(currentLane - 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && currentLane < 1)
+        if (Input.GetKeyDown(KeyCode.D) && currentLane <= 1)
         {
             MoveToLane(currentLane + 1);
         }
 
         if (transform.position.x != targetPosition.x)
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * sideShiftSpeed);
+            MoveLaterally();
         }
+    }
+
+    void MoveForward()
+    {
+        transform.Translate(Vector3.forward * (Time.deltaTime * walkingSpeed));
+    }
+
+    void MoveLaterally()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * sideShiftSpeed);
     }
 
     void MoveToLane(int lane)
     {
-        currentLane = lane;
+        currentLane = Mathf.Clamp(lane, -1, 1);
         targetPosition = new Vector3(currentLane * sideShiftDistance, transform.position.y, transform.position.z);
+        transform.Translate(Vector3.forward * (Time.deltaTime * walkingSpeed));
+        transform.Translate(Vector3.forward * (Time.deltaTime * walkingSpeed));
     }
 }
