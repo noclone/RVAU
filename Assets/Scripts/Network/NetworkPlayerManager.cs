@@ -25,13 +25,12 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
     // To be removed
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions(), TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("Room1", new RoomOptions(), TypedLobby.Default);
     }
 
     // To be removed
     public override void OnJoinedRoom()
     {
         PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
-        PhotonNetwork.Instantiate("GroundSection", Vector3.zero, Quaternion.identity);
     }
 }

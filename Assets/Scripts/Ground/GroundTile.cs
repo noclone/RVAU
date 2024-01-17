@@ -5,7 +5,8 @@ using UnityEngine;
 public class GroundTile : MonoBehaviour
 {
     public GameObject obstaclePrefab;
-    
+    private GroundSectionSpawner groundSectionSpawner;
+
     void SpawnObstacle()
     {
         // Random index between spawn points
@@ -13,15 +14,16 @@ public class GroundTile : MonoBehaviour
         Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
         Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
     }
-    // Start is called before the first frame update
+
+    private void OnTriggerExit(Collider other)
+    {
+        groundSectionSpawner.spawnSection();
+        Destroy(gameObject, 2);
+    }
+
     void Start()
     {
         SpawnObstacle();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        groundSectionSpawner = FindObjectOfType<GroundSectionSpawner>();
     }
 }
