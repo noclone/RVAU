@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b254b589-1ab1-42e3-9426-579418134124" name="Changes" comment="working on infinite">
+    <list default="true" id="b254b589-1ab1-42e3-9426-579418134124" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RVAU/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RVAU/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/GroundSection.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/GroundSection.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/GroundTile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/GroundTile.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/GroundTile.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/GroundTile.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Obstacle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Obstacle.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerVR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/PlayerVR.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ground/GroundSpawner.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ground/GroundSpawner.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ground/GroundTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ground/GroundTile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Navigation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Navigation.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +15,13 @@
   </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="origin/moving" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="infiniteGeneration" />
+      </map>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock://C:/Users/jeanf/OneDrive/Bureau/RVAU/Assets/Resources/PlayerVR.prefab" root0="SKIP_HIGHLIGHTING" />
@@ -122,6 +121,7 @@
       <workItem from="1702811626100" duration="1526000" />
       <workItem from="1705313338856" duration="1826000" />
       <workItem from="1705507471335" duration="1162000" />
+      <workItem from="1705569260824" duration="1100000" />
     </task>
     <task id="LOCAL-00001" summary="working on infinite">
       <option name="closed" value="true" />

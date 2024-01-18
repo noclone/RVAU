@@ -19,16 +19,19 @@ public class Navigation : MonoBehaviour
 
     void Update()
     {
+
+        print(currentLane);
+        print(targetLane);
         MoveForward();
 
-        if (Input.GetKeyDown(KeyCode.A) && currentLane >= -1)
+        if (Input.GetKeyDown(KeyCode.A) && ((!isMoving && currentLane > -1) || (isMoving && targetLane > -1)))
         {
-            MoveToLane(currentLane - 1);
+            MoveToLane(targetLane - 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && currentLane <= 1)
+        if (Input.GetKeyDown(KeyCode.D) && ((!isMoving && currentLane < 1) || (isMoving && targetLane < 1)))
         {
-            MoveToLane(currentLane + 1);
+            MoveToLane(targetLane + 1);
         }
 
         if (isMoving)
@@ -73,6 +76,8 @@ public class Navigation : MonoBehaviour
 
     void MoveToLane(int lane)
     {
+        if (isMoving)
+            currentLane = targetLane;
         targetLane = lane;
         isMoving = true;
     }
