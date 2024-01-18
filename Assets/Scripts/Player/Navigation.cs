@@ -19,9 +19,6 @@ public class Navigation : MonoBehaviour
 
     void Update()
     {
-
-        print(currentLane);
-        print(targetLane);
         MoveForward();
 
         if (Input.GetKeyDown(KeyCode.A) && ((!isMoving && currentLane > -1) || (isMoving && targetLane > -1)))
