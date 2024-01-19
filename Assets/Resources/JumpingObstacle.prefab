@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6923900372108025674}
   - component: {fileID: 8444875154721620255}
   m_Layer: 0
-  m_Name: Obstacle
+  m_Name: JumpingObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

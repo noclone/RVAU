@@ -1101,7 +1101,6 @@ GameObject:
   - component: {fileID: 1087113839177213659}
   - component: {fileID: 2323312784689083689}
   - component: {fileID: 2845452805255459744}
-  - component: {fileID: 2287805294501857754}
   m_Layer: 0
   m_Name: PlayerVR
   m_TagString: Untagged
@@ -1196,7 +1195,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingSpeed: 10
   sideShiftSpeed: 10
-  sideShiftDistance: 3
+  jumpForce: 3
+  Rigidbody: {fileID: 3243897829078645573}
 --- !u!114 &2845452805255459744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,29 +1209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d24e0cfc5461a5459b209b4649056a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &2287805294501857754
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6326010797563485039}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8447660284911434077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,5 +1342,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 18
   m_CollisionDetection: 0

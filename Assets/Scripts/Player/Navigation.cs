@@ -4,13 +4,16 @@ public class Navigation : MonoBehaviour
 {
     public float walkingSpeed = 5.0f;
     public float sideShiftSpeed = 5.0f;
-    public float sideShiftDistance = 3.0f; // Distance à parcourir lors du déplacement latéral
+    public float jumpForce = 10.0f;
+    public float jumpDuration = 1.0f;
+    public Rigidbody Rigidbody;
 
     // -1: left, 0: middle, 1: right
     private int currentLane;
     private int targetLane;
     private bool isMoving;
-
+    private bool isJumping;
+    private float jumpTimer;
 
     void Start()
     {
@@ -29,6 +32,16 @@ public class Navigation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D) && ((!isMoving && currentLane < 1) || (isMoving && targetLane < 1)))
         {
             MoveToLane(targetLane + 1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        {
+            StartJump();
+        }
+
+        if (isJumping)
+        {
+            UpdateJump();
         }
 
         if (isMoving)
@@ -77,5 +90,22 @@ public class Navigation : MonoBehaviour
             currentLane = targetLane;
         targetLane = lane;
         isMoving = true;
+    }
+
+    void StartJump()
+    {
+        Rigidbody.velocity = new Vector3(0, jumpForce, 0);
+        isJumping = true;
+        jumpTimer = 0.0f;
+    }
+
+    void UpdateJump()
+    {
+        jumpTimer += Time.deltaTime;
+
+        if (jumpTimer >= jumpDuration)
+        {
+            isJumping = false;
+        }
     }
 }

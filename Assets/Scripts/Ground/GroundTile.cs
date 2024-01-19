@@ -1,17 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundTile : MonoBehaviour
 {
-    public GameObject obstaclePrefab;
+    public GameObject JumpingObstacle;
+    public GameObject WallObstacle;
 
     void SpawnObstacle()
     {
-        // Random index between spawn points
-        int obstacleSpawnIndex = Random.Range(1, 4);
-        Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
-        Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
+        GameObject[] obstacles = { JumpingObstacle, WallObstacle };
+        // Select a random obstacle
+        GameObject obstaclePrefab = obstacles[Random.Range(0, obstacles.Length)];
+        if (obstaclePrefab == JumpingObstacle)
+        {
+            for (int i = 1; i < 4; i++)
+            {
+                Transform spawnPoint = transform.GetChild(i).transform;
+                Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
+            }
+        }
+        else
+        {
+            int randomPoint = Random.Range(1, 4);
+            Transform spawnPoint = transform.GetChild(randomPoint).transform;
+            Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
+        }
     }
 
     void Start()
