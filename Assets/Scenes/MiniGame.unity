@@ -427,7 +427,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -500}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &156862362
@@ -952,6 +952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aa4bb93f949be478d9aa5222b8f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptContainer: {fileID: 794075589}
 --- !u!1 &326569548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,6 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aa4bb93f949be478d9aa5222b8f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptContainer: {fileID: 794075589}
 --- !u!1 &357311137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1664,6 +1666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aa4bb93f949be478d9aa5222b8f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptContainer: {fileID: 794075589}
 --- !u!1 &506293080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,7 +1715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1722,7 +1725,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &506293083
 Canvas:
   m_ObjectHideFlags: 0
@@ -1732,7 +1735,7 @@ Canvas:
   m_GameObject: {fileID: 506293080}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1755,7 +1758,7 @@ RectTransform:
   m_GameObject: {fileID: 506293080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 794075590}
@@ -1763,9 +1766,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 435.4, y: 250.6}
+  m_SizeDelta: {x: 870.8, y: 501.2}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &528380963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2337,7 +2340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -2347,7 +2350,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &624355940
 Canvas:
   m_ObjectHideFlags: 0
@@ -2357,7 +2360,7 @@ Canvas:
   m_GameObject: {fileID: 624355937}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2380,7 +2383,7 @@ RectTransform:
   m_GameObject: {fileID: 624355937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 156862360}
@@ -2388,9 +2391,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 435.4, y: -350}
+  m_SizeDelta: {x: 870.8, y: 501.2}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &633085763
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,6 +2528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aa4bb93f949be478d9aa5222b8f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptContainer: {fileID: 794075589}
 --- !u!1 &738970187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2711,9 +2715,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e61cf214080a2478c0d6c4200a9f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pcButtonsContainer: {fileID: 0}
-  vrButtonsContainer: {fileID: 0}
-  colorButtonTag: ColorButton
+  vrButtonsContainer: {fileID: 1602629770}
+  pcButtonsContainer: {fileID: 1645907663}
+  solutionColors: []
 --- !u!114 &794075592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3422,6 +3426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aa4bb93f949be478d9aa5222b8f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptContainer: {fileID: 794075589}
 --- !u!1 &1084620935
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,7 +4034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9924528, g: 0.9924528, b: 0.9924528, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4066,6 +4071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aa4bb93f949be478d9aa5222b8f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptContainer: {fileID: 794075589}
 --- !u!1 &1284360608
 GameObject:
   m_ObjectHideFlags: 0
@@ -4200,6 +4206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aa4bb93f949be478d9aa5222b8f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptContainer: {fileID: 794075589}
 --- !u!1 &1343689828
 GameObject:
   m_ObjectHideFlags: 0
@@ -4902,7 +4909,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 2000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -4930,7 +4937,7 @@ Transform:
   m_GameObject: {fileID: 1566144480}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 435, y: -100, z: -1200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5426,6 +5433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aa4bb93f949be478d9aa5222b8f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptContainer: {fileID: 794075589}
 --- !u!1 &1688327393
 GameObject:
   m_ObjectHideFlags: 0
@@ -5694,6 +5702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aa4bb93f949be478d9aa5222b8f8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptContainer: {fileID: 794075589}
 --- !u!1 &1795682133
 GameObject:
   m_ObjectHideFlags: 0

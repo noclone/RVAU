@@ -6,25 +6,99 @@ using System.Linq;
 
 public class ColorMiniGameScript : MonoBehaviour
 {
-    public GameObject[][] colorButtons;
-    public Color[][] solutionColorPlacement;
-    public GameObject pcButtonsContainer;
+    private GameObject[][] vrColorButtons;
     public GameObject vrButtonsContainer;
-    public string colorButtonTag = "ColorButton";
+
+    private GameObject[][] pcColorButtons;
+    public GameObject pcButtonsContainer;
+
+    public Color[] solutionColors;
+    private Color[][] solutionColorPlacement;
+    private int[] unknownColorIndices;
+    private string colorButtonTag = "ColorButton";
 
     // Start is called before the first frame update
     void Start()
     {
         InitializeSolutionColors();
+        InitializeVRButtons();
+        InitializePCButtons();
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckVictoryConditions();
+    }
 
+    void CheckVictoryConditions()
+    {
+        bool victory = true;
+        for (int i = 0; i < solutionColorPlacement.Length; i++)
+        {
+            for (int j = 0; j < solutionColorPlacement[i].Length; j++)
+            {
+                if (pcColorButtons[i][j].GetComponent<Image>().color != solutionColorPlacement[i][j])
+                {
+                    victory = false;
+                    break;
+                }
+            }
+        }
+
+        if (victory)
+        {
+            Debug.Log("Victory!");
+            Time.timeScale = 0f;
+        }
+            
     }
 
     void InitializeSolutionColors()
+    {
+        // Arbitrary determined solution colors
+        Color[] baseColors = new Color[6];
+        baseColors[0] = Color.red;
+        baseColors[1] = Color.green;
+        baseColors[2] = Color.blue;
+        baseColors[3] = new Color(127f / 255f, 0f, 0f);
+        baseColors[4] = new Color(0f, 127f / 255f, 0f);
+        baseColors[5] = new Color(0f, 0f, 127f / 255f);
+
+        baseColors = ShuffleColors(baseColors);
+        
+        int colorIndex = 0;
+        unknownColorIndices = new int[3];
+        solutionColorPlacement = new Color[3][];
+        for (int i = 0; i < 3; i++)
+        {
+            solutionColorPlacement[i] = new Color[3];
+            unknownColorIndices[i] = Random.Range(0, 3);
+
+            for (int j = 0; j < solutionColorPlacement[i].Length - 1; j++)
+            {
+                solutionColorPlacement[i][j] = baseColors[colorIndex];
+                colorIndex++;
+            }
+
+            Color combinedColor = AddColors(solutionColorPlacement[i][0], solutionColorPlacement[i][1]);
+            solutionColorPlacement[i][solutionColorPlacement[i].Length - 1] = combinedColor;
+        }
+
+        // Add the 3 combined colors and shuffle for Buttons sequences
+        solutionColors = new Color[9];
+        for (int i = 0; i < solutionColorPlacement.Length; i++)
+        {
+            for (int j = 0; j < solutionColorPlacement[i].Length; j++)
+            {
+                solutionColors[i * 3 + j] = solutionColorPlacement[i][j];
+            }
+        }
+
+        solutionColors = ShuffleColors(solutionColors);
+    }
+
+    void InitializeVRButtons()
     {
         Transform vrButtonsContainerTransform = vrButtonsContainer.transform;
         GameObject[] vrButtonsWithTag = vrButtonsContainerTransform.GetComponentsInChildren<Transform>()
@@ -32,68 +106,47 @@ public class ColorMiniGameScript : MonoBehaviour
             .Select(t => t.gameObject)
             .ToArray();
 
-        colorButtons = new GameObject[3][];
-        solutionColorPlacement = new Color[3][];
+        vrColorButtons = new GameObject[3][];
 
         for (int i = 0; i < 3; i++)
         {
-            colorButtons[i] = new GameObject[3];
-            solutionColorPlacement[i] = new Color[3];
+            vrColorButtons[i] = new GameObject[3];
             for (int j = 0; j < 3; j++)
             {
                 string buttonName = "Button" + i + j;
 
-                colorButtons[i][j] = System.Array.Find(vrButtonsWithTag, b => b.name == buttonName);
-            }
-        }
+                vrColorButtons[i][j] = System.Array.Find(vrButtonsWithTag, b => b.name == buttonName);
 
-        // Arbitrary determined solution colors
-        Color[] solutionColors = new Color[6];
-        solutionColors[0] = Color.red;
-        solutionColors[1] = Color.green;
-        solutionColors[2] = Color.blue;
-        solutionColors[3] = new Color(127f / 255f, 0f, 0f);
-        solutionColors[4] = new Color(0f, 127f / 255f, 0f);
-        solutionColors[5] = new Color(0f, 0f, 127f / 255f);
-
-        for (int i = solutionColors.Length - 1; i > 0; i--)
-        {
-            int randomIndex = Random.Range(0, i + 1);
-            Color temp = solutionColors[i];
-            solutionColors[i] = solutionColors[randomIndex];
-            solutionColors[randomIndex] = temp;
-        }
-        
-        int colorIndex = 0;
-        int[] unknownColorIndices = new int[3];
-        for (int i = 0; i < colorButtons.Length; i++)
-        {
-            unknownColorIndices[i] = Random.Range(0, 3);
-
-            for (int j = 0; j < colorButtons[i].Length - 1; j++)
-            {
                 if (j == unknownColorIndices[i])
                 {
-                    colorButtons[i][j].GetComponent<Image>().color = Color.white;
-                    colorButtons[i][j].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "?";
+                    vrColorButtons[i][j].GetComponent<Image>().color = Color.white;
+                    vrColorButtons[i][j].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "?";
                 }
                 else
-                    colorButtons[i][j].GetComponent<Image>().color = solutionColors[colorIndex];
-
-                solutionColorPlacement[i][j] = solutionColors[colorIndex];
-                colorIndex++;
+                    vrColorButtons[i][j].GetComponent<Image>().color = solutionColorPlacement[i][j];
             }
+        }
+    }
 
-            Color combinedColor = AddColors(colorButtons[i][0].GetComponent<Image>().color, colorButtons[i][1].GetComponent<Image>().color);
-            if (2 == unknownColorIndices[i])
-                {
-                    colorButtons[i][2].GetComponent<Image>().color = Color.white;
-                    colorButtons[i][2].GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "?";
-                }
-                else
-                    colorButtons[i][2].GetComponent<Image>().color = combinedColor;
+    void InitializePCButtons()
+    {
+        Transform pcButtonsContainerTransform = pcButtonsContainer.transform;
+        GameObject[] pcButtonsWithTag = pcButtonsContainerTransform.GetComponentsInChildren<Transform>()
+            .Where(t => t.CompareTag(colorButtonTag))
+            .Select(t => t.gameObject)
+            .ToArray();
 
-            solutionColorPlacement[i][colorButtons[i].Length - 1] = combinedColor;
+        pcColorButtons = new GameObject[3][];
+
+        for (int i = 0; i < 3; i++)
+        {
+            pcColorButtons[i] = new GameObject[3];
+            for (int j = 0; j < 3; j++)
+            {
+                string buttonName = "Button" + i + j;
+
+                pcColorButtons[i][j] = System.Array.Find(pcButtonsWithTag, b => b.name == buttonName);
+            }
         }
     }
 
@@ -104,5 +157,18 @@ public class ColorMiniGameScript : MonoBehaviour
         float b = Mathf.Clamp01((color1.b + color2.b) / 2);
 
         return new Color(r, g, b);
+    }
+
+    Color[] ShuffleColors(Color[] colors)
+    {
+        for (int i = colors.Length - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            Color temp = colors[i];
+            colors[i] = colors[randomIndex];
+            colors[randomIndex] = temp;
+        }
+
+        return colors;
     }
 }
