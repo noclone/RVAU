@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Switch: MonoBehaviour
 {
@@ -24,6 +25,13 @@ public class Switch: MonoBehaviour
         combination = combinations[random.Next(combinations.Count)];
         combinations.Remove(combination);
         bulbs = GameObject.FindGameObjectsWithTag("Bulb").Select(bulb => bulb.GetComponent<Bulb>()).ToArray();
+    }
+
+    void Update()
+    {
+        // If all the bulbs are on, change scene
+        if (bulbs.All(bulb => bulb.isOn))
+            SceneManager.LoadScene("Game");
     }
 
     public void ON()
