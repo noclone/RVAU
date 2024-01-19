@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Bulb : MonoBehaviour
 {
-    private bool isOn = false;
+    public bool isOn = false;
 
     public void Toggle()
     {
