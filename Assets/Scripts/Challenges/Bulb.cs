@@ -10,7 +10,7 @@ public class Bulb : MonoBehaviour
     public void Toggle()
     {
         isOn = !isOn;
-        // Check if the switch is on
+        
         if (isOn)
             this.GetComponent<Image>().color = Color.green;
         else
