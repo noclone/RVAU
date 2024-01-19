@@ -1194,10 +1194,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30105f2559d2b14da2edbf65f4a1b65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 10
+  walkingSpeed: 8
   sideShiftSpeed: 10
   jumpForce: 3
-  jumpDuration: 1
   Rigidbody: {fileID: 6256928878883342866}
 --- !u!114 &2845452805255459744
 MonoBehaviour:

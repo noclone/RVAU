@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Navigation : MonoBehaviour
@@ -5,13 +6,13 @@ public class Navigation : MonoBehaviour
     public float walkingSpeed = 5.0f;
     public float sideShiftSpeed = 5.0f;
     public float jumpForce = 10.0f;
-    public float jumpDuration = 1.0f;
     public Rigidbody Rigidbody;
 
     // -1: left, 0: middle, 1: right
     private int currentLane;
     private int targetLane;
-    private bool isMoving;
+    private bool isMovingForward = true;
+    private bool isMovingLateral;
     private bool isJumping;
     private float jumpTimer;
 
@@ -22,29 +23,25 @@ public class Navigation : MonoBehaviour
 
     void Update()
     {
-        MoveForward();
+        if (isMovingForward)
+            MoveForward();
 
-        if (Input.GetKeyDown(KeyCode.A) && ((!isMoving && currentLane > -1) || (isMoving && targetLane > -1)))
+        if (Input.GetKeyDown(KeyCode.A) && ((!isMovingLateral && currentLane > -1) || (isMovingLateral && targetLane > -1)))
         {
             MoveToLane(targetLane - 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && ((!isMoving && currentLane < 1) || (isMoving && targetLane < 1)))
+        if (Input.GetKeyDown(KeyCode.D) && ((!isMovingLateral && currentLane < 1) || (isMovingLateral && targetLane < 1)))
         {
             MoveToLane(targetLane + 1);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
-            StartJump();
+            Jump();
         }
 
-        if (isJumping)
-        {
-            UpdateJump();
-        }
-
-        if (isMoving)
+        if (isMovingLateral)
         {
             MoveLaterally();
         }
@@ -68,44 +65,47 @@ public class Navigation : MonoBehaviour
         {
             transform.position = new Vector3(3, transform.position.y, transform.position.z);
             currentLane = 1;
-            isMoving = false;
+            isMovingLateral = false;
         }
         else if (transform.position.x <= -3)
         {
             transform.position = new Vector3(-3, transform.position.y, transform.position.z);
             currentLane = -1;
-            isMoving = false;
+            isMovingLateral = false;
         }
         else if (targetLane == 0 && transform.position.x >= -0.1 && transform.position.x <= 0.1)
         {
             transform.position = new Vector3(0, transform.position.y, transform.position.z);
             currentLane = 0;
-            isMoving = false;
+            isMovingLateral = false;
         }
     }
 
     void MoveToLane(int lane)
     {
-        if (isMoving)
+        if (isMovingLateral)
             currentLane = targetLane;
         targetLane = lane;
-        isMoving = true;
+        isMovingLateral = true;
     }
-
-    void StartJump()
+    void Jump()
     {
         Rigidbody.velocity = new Vector3(0, jumpForce, 0);
         isJumping = true;
-        jumpTimer = 0.0f;
     }
 
-    void UpdateJump()
+    private void OnCollisionEnter(Collision other)
     {
-        jumpTimer += Time.deltaTime;
-
-        if (jumpTimer >= jumpDuration)
+        if (other.gameObject.name.Contains("Ground"))
         {
             isJumping = false;
         }
+        // Uncomment to end the game
+        /*if (other.gameObject.name.Contains("Obstacle"))
+        {
+            isMovingForward = false;
+            Rigidbody.velocity = new Vector3(0, 0, 0);
+            print("Game Over");
+        }*/
     }
 }
