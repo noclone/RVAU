@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b254b589-1ab1-42e3-9426-579418134124" name="Changes" comment="fix navigation">
+    <list default="true" id="b254b589-1ab1-42e3-9426-579418134124" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RVAU/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RVAU/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/GroundSection.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/GroundSection.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/JumpingObstacle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/JumpingObstacle.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerVR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/PlayerVR.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerVR.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/PlayerVR.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/WallObstacle.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/WallObstacle.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ground/GroundSectionSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ground/GroundSectionSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/NetworkPlayer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Network/NetworkPlayer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Navigation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Navigation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,12 +24,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/moving" />
+    <option name="BRANCH" value="score" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="infiniteGeneration" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
   </component>
@@ -124,6 +133,7 @@
       <workItem from="1705313338856" duration="1826000" />
       <workItem from="1705507471335" duration="1162000" />
       <workItem from="1705569260824" duration="3793000" />
+      <workItem from="1705660008783" duration="2495000" />
     </task>
     <task id="LOCAL-00001" summary="working on infinite">
       <option name="closed" value="true" />

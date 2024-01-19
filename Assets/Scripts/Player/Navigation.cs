@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class Navigation : MonoBehaviour
@@ -100,12 +101,12 @@ public class Navigation : MonoBehaviour
         {
             isJumping = false;
         }
-        // Uncomment to end the game
-        /*if (other.gameObject.name.Contains("Obstacle"))
+
+        if (other.gameObject.name.Contains("Obstacle"))
         {
             isMovingForward = false;
             Rigidbody.velocity = new Vector3(0, 0, 0);
-            print("Game Over");
-        }*/
+            FindObjectOfType<GameEngine>().EndGame();
+        }
     }
 }

@@ -1196,7 +1196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkingSpeed: 8
   sideShiftSpeed: 10
-  jumpForce: 3
+  jumpForce: 5
   Rigidbody: {fileID: 6256928878883342866}
 --- !u!114 &2845452805255459744
 MonoBehaviour:
