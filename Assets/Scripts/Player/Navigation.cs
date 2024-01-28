@@ -8,6 +8,7 @@ public class Navigation : MonoBehaviour
     public float sideShiftSpeed = 5.0f;
     public float jumpForce = 10.0f;
     public Rigidbody Rigidbody;
+    public Animator animator;
 
     // -1: left, 0: middle, 1: right
     private int currentLane;
@@ -26,7 +27,7 @@ public class Navigation : MonoBehaviour
     {
         if (isMovingForward)
             MoveForward();
-
+        
         if (Input.GetKeyDown(KeyCode.A) && ((!isMovingLateral && currentLane > -1) || (isMovingLateral && targetLane > -1)))
         {
             MoveToLane(targetLane - 1);
@@ -91,6 +92,7 @@ public class Navigation : MonoBehaviour
     }
     void Jump()
     {
+        animator.SetBool("isJumping", true);
         Rigidbody.velocity = new Vector3(0, jumpForce, 0);
         isJumping = true;
     }
@@ -100,11 +102,13 @@ public class Navigation : MonoBehaviour
         if (other.gameObject.name.Contains("Ground"))
         {
             isJumping = false;
+            animator.SetBool("isJumping", false);
         }
 
         if (other.gameObject.name.Contains("Obstacle"))
         {
             isMovingForward = false;
+            animator.SetBool("isHitting", true);
             Rigidbody.velocity = new Vector3(0, 0, 0);
             FindObjectOfType<GameEngine>().EndGame();
         }
