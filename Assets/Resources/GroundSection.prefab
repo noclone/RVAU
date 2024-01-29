@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c274fb05f857fc49bcb49f022c74bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 9118845344723573307}
+  door: {fileID: 5006274761088797841}
 --- !u!1 &3390369961181700854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,14 +1488,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: c3a2e9c7a879b7d41b29957e6f9ed6c0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9118845344723573307}
+      addedObject: {fileID: 5006274761088797841}
   m_SourcePrefab: {fileID: 100100000, guid: c3a2e9c7a879b7d41b29957e6f9ed6c0, type: 3}
 --- !u!1 &7974854169653763427 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: c3a2e9c7a879b7d41b29957e6f9ed6c0, type: 3}
   m_PrefabInstance: {fileID: 7974854169653730243}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &9118845344723573307
+--- !u!95 &5006274761088797841
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -1505,7 +1505,7 @@ Animator:
   m_GameObject: {fileID: 7974854169653763427}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1e971d734d874e94aba05e0038b0fdf7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 78ed4e72aab4b364cb6fdd0e40690ac4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

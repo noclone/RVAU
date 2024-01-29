@@ -10,7 +10,7 @@ public class DoorController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            door.Play("DoorOpen");
+            door.Play("DoorOpen", 0, 0.0f);
         }
     }
 }
