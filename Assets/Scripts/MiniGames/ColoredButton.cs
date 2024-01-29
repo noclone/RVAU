@@ -32,7 +32,6 @@ public class ColoredButtons : MonoBehaviour
     // On click, change color of button by the next color in the list and loop
     void ChangeColorOnClick()
     {
-        Debug.Log("Changing color");
         button.image.color = colorList[currentColorIndex];
         currentColorIndex = (currentColorIndex + 1) % colorList.Length;
     }

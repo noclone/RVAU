@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CustomNetworkPlayerManager : MonoBehaviourPunCallbacks
 {
     public GameObject spawnPointPC;
     public GameObject spawnPointVR;
+    public GameObject canvasVR;
+    public GameObject canvasPC;
     void Start()
     {
         // To be removed
@@ -33,11 +36,18 @@ public class CustomNetworkPlayerManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
-            PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
+            GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
+            Camera camera = playerPC.GetComponent<Camera>();
+            Canvas canvas = canvasPC.GetComponent<Canvas>();
+            canvas.worldCamera = camera;
+            canvasVR.SetActive(false);
         }
         else
         {
-            PhotonNetwork.Instantiate("PlayerVR", spawnPointVR.transform.position, Quaternion.identity);
+            GameObject playerVR = PhotonNetwork.Instantiate("PlayerVR", spawnPointVR.transform.position, Quaternion.identity);
+            Camera camera = playerVR.GetComponent<Camera>();
+            Canvas canvas = canvasVR.GetComponent<Canvas>();
+            canvas.worldCamera = camera;
         }
     }
 }
