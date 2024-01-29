@@ -8,8 +8,6 @@ using Photon.Realtime;
 
 public class ColorMiniGameScript : MonoBehaviour
 {
-    public GameObject spawnPointPC;
-    public GameObject spawnPointVR;
     private GameObject[][] vrColorButtons;
     public GameObject vrButtonsContainer;
 
@@ -24,15 +22,6 @@ public class ColorMiniGameScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
-        {
-            PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
-        }
-        else
-        {
-            PhotonNetwork.Instantiate("PlayerVR", spawnPointVR.transform.position, Quaternion.identity);
-        }
-
         InitializeSolutionColors();
         InitializeVRButtons();
         InitializePCButtons();

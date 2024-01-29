@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NetworkPlayer : MonoBehaviour
@@ -9,11 +11,17 @@ public class NetworkPlayer : MonoBehaviour
     {
         if (!gameObject.GetComponent<PhotonView>().IsMine)
         {
-            gameObject.GetComponent<Navigation>().enabled = false;
-            if (gameObject.GetComponentInChildren<Camera>() != null)
-                gameObject.GetComponentInChildren<Camera>().enabled = false;
+            if (gameObject.GetComponent<Camera>() != null)
+            {
+                gameObject.GetComponent<Camera>().enabled = false;
+                gameObject.GetComponent<AudioListener>().enabled = false;
+            }
             else
-                gameObject.transform.GetChild(0).GetComponentInChildren<Camera>().enabled = false;
+            {
+                gameObject.GetComponent<Navigation>().enabled = false;
+                gameObject.transform.GetChild(0).GetChild(0).GetComponent<Camera>().enabled = false;
+                gameObject.transform.GetChild(0).GetChild(0).GetComponent<AudioListener>().enabled = false;
+            }
         }
     }
 }

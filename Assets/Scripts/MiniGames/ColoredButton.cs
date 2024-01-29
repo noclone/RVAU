@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ColoredButtons : MonoBehaviour
 {
-    public GameObject scriptContainer;
+    public GameObject scriptHolder;
     private Color[][] solutionColorPlacement;
     private Color[] colorList;
     private Button button;
@@ -14,7 +14,7 @@ public class ColoredButtons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ColorMiniGameScript gameScript = scriptContainer.GetComponent<ColorMiniGameScript>();
+        ColorMiniGameScript gameScript = scriptHolder.GetComponent<ColorMiniGameScript>();
 
         if (gameScript != null)
             colorList = gameScript.solutionColors;
@@ -32,6 +32,7 @@ public class ColoredButtons : MonoBehaviour
     // On click, change color of button by the next color in the list and loop
     void ChangeColorOnClick()
     {
+        Debug.Log("Changing color");
         button.image.color = colorList[currentColorIndex];
         currentColorIndex = (currentColorIndex + 1) % colorList.Length;
     }
