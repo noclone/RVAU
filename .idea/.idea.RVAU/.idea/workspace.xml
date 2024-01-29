@@ -31,7 +31,6 @@
       <change beforePath="$PROJECT_DIR$/Assets/Character/Runner/textures/Ch20_1001_Specular.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Character/Runner/textures/Ch20_1001_Specular.png.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Resources/PlayerVR.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/PlayerVR.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/Navigation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/Navigation.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +149,7 @@
       <workItem from="1705569260824" duration="3793000" />
       <workItem from="1705660008783" duration="2495000" />
       <workItem from="1706436080920" duration="1821000" />
-      <workItem from="1706521132807" duration="325000" />
+      <workItem from="1706521132807" duration="985000" />
     </task>
     <task id="LOCAL-00001" summary="working on infinite">
       <option name="closed" value="true" />
