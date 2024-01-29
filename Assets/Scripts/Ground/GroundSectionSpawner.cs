@@ -8,6 +8,7 @@ public class GroundSectionSpawner : MonoBehaviourPunCallbacks
     private Vector3 nextSpawnPoint;
     void Start()
     {
+        nextSpawnPoint = new Vector3(0, 0, 25);
     }
 
     public void spawnSection()

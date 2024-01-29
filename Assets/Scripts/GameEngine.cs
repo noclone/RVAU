@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class GameEngine : MonoBehaviour
 {
-    private ulong score;
     public TextMeshProUGUI scoreText;
+    public GameObject gameOverPanel;
+    public TextMeshProUGUI gameOverScoreText;
 
     public float scoreIncrementInterval = 1.0f;
     private float timer;
+    private ulong score;
+    private bool isGameOver;
 
     void Start()
     {
@@ -17,7 +20,8 @@ public class GameEngine : MonoBehaviour
 
     void Update()
     {
-        UpdateTimer();
+        if (!isGameOver)
+            UpdateTimer();
     }
 
     void UpdateTimer()
@@ -35,5 +39,12 @@ public class GameEngine : MonoBehaviour
     void UpdateScoreText()
     {
         scoreText.text = "Score: " + "<mspace=0.6em>" + score.ToString("D6");
+    }
+
+    public void EndGame()
+    {
+        isGameOver = true;
+        gameOverPanel.SetActive(true);
+        gameOverScoreText.text = "Score: " + score;
     }
 }

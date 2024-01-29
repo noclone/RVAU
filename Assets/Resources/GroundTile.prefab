@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 2147772425687718318}
   m_Layer: 0
   m_Name: GroundTile
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,7 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f22d27573aaf34d8cfc08989b36af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 4322982403599455203, guid: 156c6090aa636604883330f583a0a3f1, type: 3}
+  JumpingObstacle: {fileID: 4322982403599455203, guid: 156c6090aa636604883330f583a0a3f1, type: 3}
+  WallObstacle: {fileID: 1436048808625570977, guid: 5007e62807d6cdc40bdfd0df348b71ce, type: 3}
 --- !u!1 &7021326360262597311
 GameObject:
   m_ObjectHideFlags: 0
