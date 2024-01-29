@@ -27,7 +27,7 @@ public class Navigation : MonoBehaviour
     {
         if (isMovingForward)
             MoveForward();
-        
+
         if (Input.GetKeyDown(KeyCode.A) && ((!isMovingLateral && currentLane > -1) || (isMovingLateral && targetLane > -1)))
         {
             MoveToLane(targetLane - 1);
@@ -99,13 +99,13 @@ public class Navigation : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.name.Contains("Ground"))
+        if (other.gameObject.CompareTag("Ground"))
         {
             isJumping = false;
             animator.SetBool("isJumping", false);
         }
 
-        if (other.gameObject.name.Contains("Obstacle"))
+        if (other.gameObject.CompareTag("Obstacle"))
         {
             isMovingForward = false;
             animator.SetBool("isHitting", true);
