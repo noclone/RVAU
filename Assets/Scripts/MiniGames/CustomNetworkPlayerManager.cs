@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class CustomNetworkPlayerManager : MonoBehaviourPunCallbacks
     // To be removed
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions(), TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("RoomMiniGame", new RoomOptions(), TypedLobby.Default);
     }
 
     // To be removed
@@ -49,5 +50,6 @@ public class CustomNetworkPlayerManager : MonoBehaviourPunCallbacks
             Canvas canvas = canvasVR.GetComponent<Canvas>();
             canvas.worldCamera = camera;
         }
+        GameObject.Find("ScriptHolder").GetComponent<ColorMiniGameScript>().enabled = true;
     }
 }

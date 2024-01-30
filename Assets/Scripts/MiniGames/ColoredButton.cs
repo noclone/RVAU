@@ -6,33 +6,25 @@ using UnityEngine.UI;
 public class ColoredButtons : MonoBehaviour
 {
     public GameObject scriptHolder;
-    private Color[][] solutionColorPlacement;
-    private Color[] colorList;
+    private SerializableColor[][] solutionColorPlacement;
+    private SerializableColor[] colorList;
     private Button button;
     private int currentColorIndex = 0;
+    private ColorMiniGameScript gameScript;
 
-    // Start is called before the first frame update
     void Start()
     {
-        ColorMiniGameScript gameScript = scriptHolder.GetComponent<ColorMiniGameScript>();
-
-        if (gameScript != null)
-            colorList = gameScript.solutionColors;
-
+        gameScript = scriptHolder.GetComponent<ColorMiniGameScript>();
         button = GetComponent<Button>();
         button.onClick.AddListener(ChangeColorOnClick);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     // On click, change color of button by the next color in the list and loop
     void ChangeColorOnClick()
     {
-        button.image.color = colorList[currentColorIndex];
+        if (colorList == null)
+            colorList = gameScript.solutionColors;
+        button.image.color = new Color(colorList[currentColorIndex].r, colorList[currentColorIndex].g, colorList[currentColorIndex].b);
         currentColorIndex = (currentColorIndex + 1) % colorList.Length;
     }
 }
