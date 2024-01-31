@@ -1,4 +1,5 @@
 using System;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
@@ -40,6 +41,11 @@ public class Navigation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
+            // To be removed
+            GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadColorMiniGame();
+
+
+
             Jump();
         }
 

@@ -31,6 +31,14 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
     // To be removed
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
+        {
+            PhotonNetwork.Instantiate("Player", spawnPoint1.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
+        }
+        GameObject.Find("GameEngine").GetComponent<GameEngine>().StartGame();
     }
 }

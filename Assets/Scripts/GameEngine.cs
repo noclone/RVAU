@@ -1,3 +1,4 @@
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class GameEngine : MonoBehaviour
     private float timer;
     private ulong score;
     private bool isGameOver;
+    private bool hasGameStarted;
 
     void Start()
     {
@@ -20,7 +22,7 @@ public class GameEngine : MonoBehaviour
 
     void Update()
     {
-        if (!isGameOver)
+        if (!isGameOver && hasGameStarted)
             UpdateTimer();
     }
 
@@ -46,5 +48,22 @@ public class GameEngine : MonoBehaviour
         isGameOver = true;
         gameOverPanel.SetActive(true);
         gameOverScoreText.text = "Score: " + score;
+    }
+
+    public void StartGame()
+    {
+        hasGameStarted = true;
+    }
+
+    public void LoadColorMiniGame()
+    {
+        PhotonView photonView = PhotonView.Get(this);
+        photonView.RPC("RPC_LoadColorMiniGame", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void RPC_LoadColorMiniGame()
+    {
+        PhotonNetwork.LoadLevel("MiniGame");
     }
 }

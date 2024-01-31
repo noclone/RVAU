@@ -21,16 +21,38 @@ public class ColorMiniGameScript : MonoBehaviour
     private bool victory = false;
     private bool isLoaded;
 
-    // Start is called before the first frame update
+    public GameObject spawnPointPC;
+    public GameObject spawnPointVR;
+    public GameObject canvasVR;
+    public GameObject canvasPC;
+
     void Start()
     {
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
+        {
+            GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
+            Camera camera = playerPC.GetComponent<Camera>();
+            Canvas canvas = canvasPC.GetComponent<Canvas>();
+            canvas.worldCamera = camera;
+            canvasVR.SetActive(false);
+        }
+        else
+        {
+            GameObject playerVR = PhotonNetwork.Instantiate("PlayerVR", spawnPointVR.transform.position, Quaternion.identity);
+            playerVR.transform.GetChild(1).gameObject.SetActive(false);
+            playerVR.GetComponent<Rigidbody>().useGravity = false;
+            playerVR.GetComponent<Navigation>().enabled = false;
+            Camera camera = playerVR.GetComponent<Camera>();
+            Canvas canvas = canvasVR.GetComponent<Canvas>();
+            canvas.worldCamera = camera;
+        }
+
         if (PhotonNetwork.IsMasterClient)
         {
             InitializeSolutionColors();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isLoaded)
