@@ -119,4 +119,15 @@ public class Navigation : MonoBehaviour
             FindObjectOfType<GameEngine>().EndGame();
         }
     }
+
+    public void ResetAll()
+    {
+        currentLane = 0;
+        targetLane = 0;
+        isMovingForward = true;
+        isJumping = false;
+        animator.SetBool("isHitting", false);
+        animator.SetBool("isJumping", false);
+        animator.Play("Running");
+    }
 }

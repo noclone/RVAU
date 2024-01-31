@@ -63,6 +63,7 @@ public class GroundTile : MonoBehaviour
 
     void Start()
     {
-        SpawnObstacle();
+        if (PhotonNetwork.IsMasterClient)
+            SpawnObstacle();
     }
 }

@@ -8,14 +8,20 @@ public class GameEngine : MonoBehaviour
     public GameObject gameOverPanel;
     public TextMeshProUGUI gameOverScoreText;
 
+    public GameObject spawnPointPC;
+    public GameObject spawnPointVR;
+
     public float scoreIncrementInterval = 1.0f;
     private float timer;
     private ulong score;
     private bool isGameOver;
     private bool hasGameStarted;
 
+    private PhotonView photonView;
+
     void Start()
     {
+        photonView = PhotonView.Get(this);
         score = 0;
         UpdateScoreText();
     }
@@ -55,9 +61,15 @@ public class GameEngine : MonoBehaviour
         hasGameStarted = true;
     }
 
+    public void RestartGame()
+    {
+        if (PhotonNetwork.IsMasterClient)
+            GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().ResetAll();
+        photonView.RPC("RPC_RestartGame", RpcTarget.All);
+    }
+
     public void LoadColorMiniGame()
     {
-        PhotonView photonView = PhotonView.Get(this);
         photonView.RPC("RPC_LoadColorMiniGame", RpcTarget.All);
     }
 
@@ -65,5 +77,18 @@ public class GameEngine : MonoBehaviour
     private void RPC_LoadColorMiniGame()
     {
         PhotonNetwork.LoadLevel("MiniGame");
+    }
+
+    [PunRPC]
+    private void RPC_RestartGame()
+    {
+        isGameOver = false;
+        gameOverPanel.SetActive(false);
+        score = 0;
+
+        GameObject playerVR = GameObject.Find("PlayerVR(Clone)");
+        playerVR.transform.position = spawnPointVR.transform.position;
+        playerVR.GetComponent<Navigation>().ResetAll();
+        GameObject.Find("Player(Clone)").transform.position = spawnPointPC.transform.position;
     }
 }

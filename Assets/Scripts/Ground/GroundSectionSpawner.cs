@@ -9,6 +9,7 @@ public class GroundSectionSpawner : MonoBehaviourPunCallbacks
     void Start()
     {
         nextSpawnPoint = new Vector3(0, 0, 25);
+        SpawnStartSections();
     }
 
     public void spawnSection()
@@ -17,10 +18,23 @@ public class GroundSectionSpawner : MonoBehaviourPunCallbacks
         nextSpawnPoint = section.transform.GetChild(0).transform.position;
     }
 
-    // To be removed and move content to start
-    public override void OnJoinedRoom()
+    private void SpawnStartSections()
     {
+        PhotonNetwork.Instantiate("BaseTiles", Vector3.zero, Quaternion.identity);
         for (int i = 0; i < 10; i++)
             spawnSection();
+    }
+
+    public void ResetAll()
+    {
+        GameObject[] allObjects = FindObjectsOfType<GameObject>() ;
+        foreach(GameObject go in allObjects)
+        {
+            if (go.activeInHierarchy && go.name.Contains("(Clone)") && (go.CompareTag("Ground") || go.CompareTag("Obstacle")))
+                PhotonNetwork.Destroy(go);
+        }
+
+        nextSpawnPoint = new Vector3(0, 0, 25);
+        SpawnStartSections();
     }
 }
