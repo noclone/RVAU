@@ -71,7 +71,6 @@ public class ColorMiniGameScript : MonoBehaviour
             {
                 if (pcColorButtons[i][j].GetComponent<Image>().color != new Color(solutionColorPlacement[i][j].r, solutionColorPlacement[i][j].g, solutionColorPlacement[i][j].b))
                 {
-                    Debug.Log("Button " + i + j + " is not correct");
                     gameVictory = false;
                     break;
                 }
