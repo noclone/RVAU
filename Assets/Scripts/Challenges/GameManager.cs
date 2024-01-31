@@ -20,34 +20,38 @@ public class GameManager : MonoBehaviour
 
         bulbs = FindObjectsOfType<Bulb>().ToList();
         switches = FindObjectsOfType<Switch>().ToList();
-        switchMapping = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+        switchMapping = new List<int> {};
 
         System.Random random = new System.Random();
-        int n = switchMapping.Count;
 
-        for (int i = n - 1; i > 0; i--)
+        for (int i = 0; i < switches.Count; i++)
         {
-            int j = random.Next(0, i + 1);
+            int randomIndex;
 
-            int tmp = switchMapping[i];
-            switchMapping[i] = switchMapping[j];
-            switchMapping[j] = tmp;
+            do
+            {
+                randomIndex = random.Next(0, bulbs.Count);
+            } while (switchMapping.Contains(randomIndex));
+
+            switchMapping.Add(randomIndex);
+
+            if (random.Next(0, 2) == 0)
+                Toggle(switches[i].GetInstanceID());
         }
 
+        GameObject canvasPC = GameObject.Find("CanvasPC");
+        GameObject canvasVR = GameObject.Find("CanvasVR");
 
-        // GameObject canvasPC = GameObject.Find("CanvasPC");
-        // GameObject canvasVR = GameObject.Find("CanvasVR");
-
-        // if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
-        // {
-        //     canvasPC.SetActive(true);
-        //     canvasVR.SetActive(false);
-        // } 
-        // else
-        // {
-        //     canvasVR.SetActive(true);
-        //     canvasPC.SetActive(false);
-        // }
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
+        {
+            canvasPC.SetActive(true);
+            canvasVR.SetActive(false);
+        } 
+        else
+        {
+            canvasVR.SetActive(true);
+            canvasPC.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -60,7 +64,6 @@ public class GameManager : MonoBehaviour
     public void Toggle(int switchId)
     {
         int index = switches.FindIndex(s => s.GetInstanceID() == switchId);
-        Debug.Log(index);
         int bulbIndex = switchMapping[index];
 
         foreach (Bulb bulb in bulbs) {
