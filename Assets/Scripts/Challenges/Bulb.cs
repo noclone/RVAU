@@ -5,15 +5,21 @@ using UnityEngine.UI;
 
 public class Bulb : MonoBehaviour
 {
-    public bool isOn = false;
+    public bool isOn = true;
+
+    public void Start()
+    {
+        this.GetComponent<Image>().color = Color.yellow;
+    }
+
 
     public void Toggle()
     {
         isOn = !isOn;
         
         if (isOn)
-            this.GetComponent<Image>().color = Color.green;
+            this.GetComponent<Image>().color = Color.yellow;
         else
-            this.GetComponent<Image>().color = Color.red;
+            this.GetComponent<Image>().color = Color.gray;
     }
 }
