@@ -45,6 +45,7 @@ public class ColorMiniGameScript : MonoBehaviour
             Camera camera = playerVR.GetComponent<Camera>();
             Canvas canvas = canvasVR.GetComponent<Canvas>();
             canvas.worldCamera = camera;
+            canvasPC.SetActive(false);
         }
 
         if (PhotonNetwork.IsMasterClient)

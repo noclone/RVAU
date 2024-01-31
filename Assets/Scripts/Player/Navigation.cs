@@ -1,7 +1,6 @@
-using System;
-using Photon.Pun;
-using TMPro;
 using UnityEngine;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Navigation : MonoBehaviour
 {
@@ -19,9 +18,17 @@ public class Navigation : MonoBehaviour
     private bool isJumping;
     private float jumpTimer;
 
+    private XRController leftController;
+    private XRController rightController;
+
+    private bool isLeftPressed;
+    private bool isRightPressed;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        leftController = GameObject.Find("Left Controller").GetComponent<XRController>();
+        rightController = GameObject.Find("Right Controller").GetComponent<XRController>();
     }
 
     void Update()
@@ -29,17 +36,37 @@ public class Navigation : MonoBehaviour
         if (isMovingForward)
             MoveForward();
 
-        if (Input.GetKeyDown(KeyCode.A) && ((!isMovingLateral && currentLane > -1) || (isMovingLateral && targetLane > -1)))
+        if (isLeftPressed && leftController.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isLeftPressedValue) && !isLeftPressedValue)
         {
+            isLeftPressed = false;
+        }
+
+        if (isRightPressed && rightController.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool isRightPressedValue) && !isRightPressedValue)
+        {
+            isRightPressed = false;
+        }
+
+        if ((Input.GetKeyDown(KeyCode.A) || (leftController != null && leftController.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool leftButtonPressed) && leftButtonPressed && !isLeftPressed))
+            && ((!isMovingLateral && currentLane > -1) || (isMovingLateral && targetLane > -1)))
+        {
+            isLeftPressed = true;
             MoveToLane(targetLane - 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && ((!isMovingLateral && currentLane < 1) || (isMovingLateral && targetLane < 1)))
+        if ((Input.GetKeyDown(KeyCode.D) || (rightController != null && rightController.inputDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool rightButtonPressed) && rightButtonPressed && !isRightPressed))
+            && ((!isMovingLateral && currentLane < 1) || (isMovingLateral && targetLane < 1)))
         {
+            isRightPressed = true;
             MoveToLane(targetLane + 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        if ((Input.GetKeyDown(KeyCode.Space) || ((leftController != null &&
+                                                  leftController.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton,
+                                                      out bool leftSecondaryButtonPressed) && leftSecondaryButtonPressed)
+                                                 || (rightController != null &&
+                                                     rightController.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton,
+                                                         out bool rightSecondaryButtonPressed) && rightSecondaryButtonPressed)))
+            && !isJumping)
         {
             // To be removed
             GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadColorMiniGame();
