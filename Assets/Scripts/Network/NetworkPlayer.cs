@@ -21,6 +21,7 @@ public class NetworkPlayer : MonoBehaviour
                 gameObject.GetComponent<Navigation>().enabled = false;
                 gameObject.transform.GetChild(0).GetChild(0).GetComponent<Camera>().enabled = false;
                 gameObject.transform.GetChild(0).GetChild(0).GetComponent<AudioListener>().enabled = false;
+                Cursor.lockState = CursorLockMode.None;
             }
         }
     }
