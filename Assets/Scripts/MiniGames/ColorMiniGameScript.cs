@@ -18,6 +18,7 @@ public class ColorMiniGameScript : MonoBehaviour
     private SerializableColor[][] solutionColorPlacement;
     private int[] unknownColorIndices;
     private string colorButtonTag = "ColorButton";
+    private bool victory = false;
     private bool isLoaded;
 
     // Start is called before the first frame update
@@ -34,30 +35,43 @@ public class ColorMiniGameScript : MonoBehaviour
     {
         if (!isLoaded)
             return;
+
         CheckVictoryConditions();
+
+        if (victory)
+        {
+            Debug.Log("Victory !");
+
+            // TODO: End of minigame, change scene
+        }
     }
 
     void CheckVictoryConditions()
     {
-        bool victory = true;
+        bool gameVictory = true;
         for (int i = 0; i < solutionColorPlacement.Length; i++)
         {
             for (int j = 0; j < solutionColorPlacement[i].Length; j++)
             {
                 if (pcColorButtons[i][j].GetComponent<Image>().color != new Color(solutionColorPlacement[i][j].r, solutionColorPlacement[i][j].g, solutionColorPlacement[i][j].b))
                 {
-                    victory = false;
+                    gameVictory = false;
                     break;
                 }
             }
         }
 
-        if (victory)
+        if (gameVictory)
         {
-            Debug.Log("Victory!");
-            Time.timeScale = 0f;
+            // Set victory to true for all players
+            PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
         }
+    }
 
+    [PunRPC]
+    void SetVictory()
+    {
+        victory = true;
     }
 
     void InitializeSolutionColors()
