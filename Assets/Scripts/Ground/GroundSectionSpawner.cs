@@ -21,7 +21,7 @@ public class GroundSectionSpawner : MonoBehaviourPunCallbacks
     private void SpawnStartSections()
     {
         PhotonNetwork.Instantiate("BaseTiles", Vector3.zero, Quaternion.identity);
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 2; i++)
             spawnSection();
     }
 

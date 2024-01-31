@@ -11,7 +11,6 @@ public class GroundSection : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        groundSectionSpawner.spawnSection();
-        Destroy(gameObject, 2);
+        GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadColorMiniGame();
     }
 }

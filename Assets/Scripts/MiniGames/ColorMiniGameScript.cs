@@ -34,7 +34,7 @@ public class ColorMiniGameScript : MonoBehaviour
             Camera camera = playerPC.GetComponent<Camera>();
             Canvas canvas = canvasPC.GetComponent<Canvas>();
             canvas.worldCamera = camera;
-            canvasVR.SetActive(false);
+            canvasPC.SetActive(true);
         }
         else
         {
@@ -45,7 +45,7 @@ public class ColorMiniGameScript : MonoBehaviour
             Camera camera = playerVR.GetComponent<Camera>();
             Canvas canvas = canvasVR.GetComponent<Canvas>();
             canvas.worldCamera = camera;
-            canvasPC.SetActive(false);
+            canvasVR.SetActive(true);
         }
 
         if (PhotonNetwork.IsMasterClient)
@@ -60,13 +60,6 @@ public class ColorMiniGameScript : MonoBehaviour
             return;
 
         CheckVictoryConditions();
-
-        if (victory)
-        {
-            Debug.Log("Victory !");
-
-            // TODO: End of minigame, change scene
-        }
     }
 
     void CheckVictoryConditions()
@@ -78,6 +71,7 @@ public class ColorMiniGameScript : MonoBehaviour
             {
                 if (pcColorButtons[i][j].GetComponent<Image>().color != new Color(solutionColorPlacement[i][j].r, solutionColorPlacement[i][j].g, solutionColorPlacement[i][j].b))
                 {
+                    Debug.Log("Button " + i + j + " is not correct");
                     gameVictory = false;
                     break;
                 }
@@ -94,7 +88,7 @@ public class ColorMiniGameScript : MonoBehaviour
     [PunRPC]
     void SetVictory()
     {
-        victory = true;
+        PhotonNetwork.LoadLevel("Game");
     }
 
     void InitializeSolutionColors()

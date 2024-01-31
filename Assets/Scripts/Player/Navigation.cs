@@ -68,11 +68,6 @@ public class Navigation : MonoBehaviour
                                                          out bool rightSecondaryButtonPressed) && rightSecondaryButtonPressed)))
             && !isJumping)
         {
-            // To be removed
-            GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadColorMiniGame();
-
-
-
             Jump();
         }
 
