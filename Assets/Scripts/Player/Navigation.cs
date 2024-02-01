@@ -121,7 +121,8 @@ public class Navigation : MonoBehaviour
     void Jump()
     {
         animator.SetBool("isJumping", true);
-        Rigidbody.velocity = new Vector3(0, jumpForce, 0);
+        Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0, Rigidbody.velocity.z);
+        Rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isJumping = true;
     }
 
