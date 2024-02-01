@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
-using UnityEngine.XR.Interaction.Toolkit;
+using XRController = UnityEngine.XR.Interaction.Toolkit.XRController;
 
 public class Navigation : MonoBehaviour
 {
