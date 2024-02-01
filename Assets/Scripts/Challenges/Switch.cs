@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class Switch: MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Switch: MonoBehaviour
         Off.gameObject.SetActive(true);
         On.gameObject.SetActive(false);
         
-        GameManager.instance.Toggle(this.GetInstanceID());
+        PhotonView.Get(this).RPC("GameManager.instance.Toggle", RpcTarget.AllBuffered, this.GetInstanceID());
     }
 
     public void OFF()
@@ -19,6 +20,6 @@ public class Switch: MonoBehaviour
         Off.gameObject.SetActive(false);
         On.gameObject.SetActive(true);
 
-        GameManager.instance.Toggle(this.GetInstanceID());
+         PhotonView.Get(this).RPC("GameManager.instance.Toggle", RpcTarget.AllBuffered, this.GetInstanceID());
     }
 }
