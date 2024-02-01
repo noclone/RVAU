@@ -21,28 +21,28 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
-        {
-            GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
-            Camera camera = playerPC.GetComponent<Camera>();
-            Canvas canvas = canvasPC.GetComponent<Canvas>();
-            canvas.worldCamera = camera;
-            canvasPC.SetActive(true);
-        }
-        else
-        {
-            GameObject playerVR = PhotonNetwork.Instantiate("PlayerVR", spawnPointVR.transform.position, Quaternion.identity);
-            playerVR.transform.GetChild(1).gameObject.SetActive(false);
-            playerVR.GetComponent<Rigidbody>().useGravity = false;
-            playerVR.GetComponent<Navigation>().enabled = false;
-            Camera camera = playerVR.GetComponent<Camera>();
-            Canvas canvas = canvasVR.GetComponent<Canvas>();
-            canvas.worldCamera = camera;
-            canvasVR.SetActive(true);
-        }
+        // if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
+        // {
+        //     GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
+        //     Camera camera = playerPC.GetComponent<Camera>();
+        //     Canvas canvas = canvasPC.GetComponent<Canvas>();
+        //     canvas.worldCamera = camera;
+        //     canvasPC.SetActive(true);
+        // }
+        // else
+        // {
+        //     GameObject playerVR = PhotonNetwork.Instantiate("PlayerVR", spawnPointVR.transform.position, Quaternion.identity);
+        //     playerVR.transform.GetChild(1).gameObject.SetActive(false);
+        //     playerVR.GetComponent<Rigidbody>().useGravity = false;
+        //     playerVR.GetComponent<Navigation>().enabled = false;
+        //     Camera camera = playerVR.GetComponent<Camera>();
+        //     Canvas canvas = canvasVR.GetComponent<Canvas>();
+        //     canvas.worldCamera = camera;
+        //     canvasVR.SetActive(true);
+        // }
 
-        if (PhotonNetwork.IsMasterClient)
-        {
+        // if (PhotonNetwork.IsMasterClient)
+        // {
             instance = this;
 
             bulbs = FindObjectsOfType<Bulb>().ToList();
@@ -69,14 +69,16 @@ public class GameManager : MonoBehaviour
                     ++count;
                 }
             }
-        }
+       // }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (bulbs.All(b => b.isOn))
-            PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
+        // if (PhotonNetwork.IsMasterClient) {
+            if (bulbs.All(b => b.isOn))
+                PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
+        // }
     }
 
     [PunRPC]
