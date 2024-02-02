@@ -76,7 +76,7 @@ public class GameEngine : MonoBehaviour
     [PunRPC]
     private void RPC_LoadColorMiniGame()
     {
-        PhotonNetwork.LoadLevel("MiniGame");
+        PhotonNetwork.LoadLevel("ColorMiniGame");
     }
 
     [PunRPC]
