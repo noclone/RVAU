@@ -11,6 +11,6 @@ public class GroundSection : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadColorMiniGame();
+        GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadTextMiniGame();
     }
 }
