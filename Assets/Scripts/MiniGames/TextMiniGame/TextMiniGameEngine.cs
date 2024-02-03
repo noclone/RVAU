@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Linq;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 public class TextMiniGameEngine : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class TextMiniGameEngine : MonoBehaviour
     public GameObject spawnPointVR;
     public GameObject canvasVR;
     public GameObject canvasPC;
+    public TextMeshProUGUI initialWordText;
+    public TMP_InputField inputField;
+    public Button submitButton;
 
     private String[] possibleWords = new[]
     {
@@ -87,6 +91,7 @@ public class TextMiniGameEngine : MonoBehaviour
         {
             InitializeSolutionWord();
         }
+        submitButton.onClick.AddListener(CheckVictoryConditions);
     }
 
     private void InitializeSolutionWord()
@@ -110,21 +115,21 @@ public class TextMiniGameEngine : MonoBehaviour
         }
         initialWord = new String(answerChars);
         Debug.Log("The initial word is: " + initialWord);
-        isLoaded = true;
+        isLoaded = true; 
+        initialWordText.text = initialWord;
     }
 
     void Update()
     {
         if (!isLoaded)
             return;
-
-        CheckVictoryConditions();
+        
     }
-
+    
     void CheckVictoryConditions()
     {
-        bool gameVictory = false;
-
+        bool gameVictory = inputField.text == answerWord;
+        
         if (gameVictory)
         {
             // Set victory to true for all players
