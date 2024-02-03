@@ -24,6 +24,7 @@ public class TextMiniGameEngine : MonoBehaviour
     public TextMeshProUGUI initialWordText;
     public TMP_InputField inputField;
     public Button submitButton;
+    public GameObject errorText;
 
     private String[] possibleWords = new[]
     {
@@ -66,7 +67,6 @@ public class TextMiniGameEngine : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Start TextMiniGameEngine");
         if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
             GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
@@ -114,7 +114,6 @@ public class TextMiniGameEngine : MonoBehaviour
             answerChars[index] = '_';
         }
         initialWord = new String(answerChars);
-        Debug.Log("The initial word is: " + initialWord);
         isLoaded = true; 
         initialWordText.text = initialWord;
     }
@@ -123,17 +122,18 @@ public class TextMiniGameEngine : MonoBehaviour
     {
         if (!isLoaded)
             return;
-        
     }
     
     void CheckVictoryConditions()
     {
-        bool gameVictory = inputField.text == answerWord;
-        
-        if (gameVictory)
+        if (inputField.text == answerWord)
         {
             // Set victory to true for all players
             PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
+        }
+        else
+        {
+            errorText.SetActive(true);
         }
     }
 
