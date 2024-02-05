@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
 using XRController = UnityEngine.XR.Interaction.Toolkit.XRController;
+using Photon.Pun;
 
 public class Navigation : MonoBehaviour
 {
