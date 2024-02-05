@@ -11,6 +11,10 @@ public class GroundSection : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadTextMiniGame();
+        int rnd = UnityEngine.Random.Range(0, 2);
+        if (rnd == 0)
+            GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadTextMiniGame();
+        else if (rnd == 1)
+            GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadColorMiniGame();
     }
 }
