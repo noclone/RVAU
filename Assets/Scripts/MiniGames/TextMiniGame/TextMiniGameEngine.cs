@@ -7,6 +7,7 @@ using System.Linq;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit.UI;
 
 public class TextMiniGameEngine : MonoBehaviour
 {
@@ -70,6 +71,8 @@ public class TextMiniGameEngine : MonoBehaviour
         if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
             GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
+            GameObject eventSystem = GameObject.Find("EventSystem");
+            eventSystem.GetComponent<XRUIInputModule>().enabled = false;
             Camera camera = playerPC.GetComponent<Camera>();
             Canvas canvas = canvasPC.GetComponent<Canvas>();
             canvas.worldCamera = camera;
