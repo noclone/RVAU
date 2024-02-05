@@ -5,7 +5,7 @@ public class GroundTile : MonoBehaviour
 {
     void SpawnObstacle()
     {
-        int patternType = 5;//Random.Range(0, 4);
+        int patternType = Random.Range(0, 4);
         int randomObstacle;
         string obstacleName;
         switch (patternType)

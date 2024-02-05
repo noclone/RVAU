@@ -14,7 +14,8 @@ public class TextMiniGameEngine : MonoBehaviour
 
     private bool victory = false;
     private bool isLoaded;
-    
+    private bool isDeactivated;
+
     public String answerWord;
     public String initialWord;
 
@@ -26,7 +27,6 @@ public class TextMiniGameEngine : MonoBehaviour
     public TMP_InputField inputField;
     public Button submitButton;
     public GameObject errorText;
-    public GameObject EventSystem;
 
     private String[] possibleWords = new[]
     {
@@ -72,7 +72,6 @@ public class TextMiniGameEngine : MonoBehaviour
         if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
             GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
-            EventSystem.GetComponent<XRUIInputModule>().enabled = false;
             Camera camera = playerPC.GetComponent<Camera>();
             Canvas canvas = canvasPC.GetComponent<Canvas>();
             canvas.worldCamera = camera;
@@ -101,11 +100,11 @@ public class TextMiniGameEngine : MonoBehaviour
     {
         answerWord = possibleWords[UnityEngine.Random.Range(0, possibleWords.Length)];
         Debug.Log("The answer is: " + answerWord);
-        
+
         // Send RPC to initialize colors on all clients
         PhotonView.Get(this).RPC("InitSolutionWord", RpcTarget.AllBuffered, answerWord);
     }
-    
+
     [PunRPC]
     void InitSolutionWord(String answer)
     {
@@ -117,7 +116,7 @@ public class TextMiniGameEngine : MonoBehaviour
             answerChars[index] = '_';
         }
         initialWord = new String(answerChars);
-        isLoaded = true; 
+        isLoaded = true;
         initialWordText.text = initialWord;
     }
 
@@ -125,8 +124,16 @@ public class TextMiniGameEngine : MonoBehaviour
     {
         if (!isLoaded)
             return;
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 1 && !isDeactivated)
+        {
+            GameObject eventSystem = GameObject.Find("EventSystem");
+            if (eventSystem.GetComponent<XRUIInputModule>() == null)
+                return;
+            isDeactivated = true;
+            eventSystem.GetComponent<XRUIInputModule>().enabled = false;
+        }
     }
-    
+
     void CheckVictoryConditions()
     {
         if (inputField.text == answerWord)
