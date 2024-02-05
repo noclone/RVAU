@@ -27,10 +27,13 @@ public class DoorController : MonoBehaviour
 
     private void HideObstacles(bool state)
     {
+        if (!PhotonNetwork.IsMasterClient)
+            return;
+        
         GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         foreach (GameObject obstacle in obstacles)
         {
-            obstacle.SetActive(state);
+            obstacle.GetComponent<MeshRenderer>().enabled = state;
         }
     }
 }
