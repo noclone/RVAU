@@ -142,9 +142,14 @@ public class Navigation : MonoBehaviour
             Rigidbody.velocity = new Vector3(0, 0, 0);
             FindObjectOfType<GameEngine>().EndGame();
 
-            GameObject.Find("Player(Clone)").GetComponent<NavigationPC>().StopMoving();
+            PhotonView.Get(this).RPC("StopPCPlayer", RpcTarget.All);
         }
+    }
 
+    [PunRPC]
+    private void StopPCPlayer()
+    {
+        GameObject.Find("Player(Clone)").GetComponent<NavigationPC>().StopMoving();
     }
 
     public void ResetAll()
