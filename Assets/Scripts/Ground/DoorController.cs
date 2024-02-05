@@ -13,7 +13,7 @@ public class DoorController : MonoBehaviour
             HideObstacles(true);
 
             int rnd = Random.Range(0, 3);
-            rnd = 2;
+
             if (rnd == 0)
                 GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadTextMiniGame();
             else if (rnd == 1)
@@ -22,7 +22,7 @@ public class DoorController : MonoBehaviour
                 HideObstacles(false);
         }
     }
-    
+
     private void HideObstacles(bool state)
     {
         if (PhotonNetwork.IsMasterClient)
@@ -33,5 +33,7 @@ public class DoorController : MonoBehaviour
         {
             obstacle.GetComponent<MeshRenderer>().enabled = state;
         }
+
+        GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().spawnSection();
     }
 }

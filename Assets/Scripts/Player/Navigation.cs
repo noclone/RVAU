@@ -136,7 +136,7 @@ public class Navigation : MonoBehaviour
             animator.SetBool("isJumping", false);
         }
 
-        if (other.gameObject.CompareTag("Obstacle"))
+        if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Wall"))
         {
             isMovingForward = false;
             animator.SetBool("isHitting", true);
