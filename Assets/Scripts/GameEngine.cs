@@ -99,8 +99,10 @@ public class GameEngine : MonoBehaviour
         score = 0;
 
         GameObject playerVR = GameObject.Find("PlayerVR(Clone)");
+        GameObject playerPC = GameObject.Find("Player(Clone)");
         playerVR.transform.position = spawnPointVR.transform.position;
         playerVR.GetComponent<Navigation>().ResetAll();
+        playerPC.GetComponent<NavigationPC>().ResetAll();
         GameObject.Find("Player(Clone)").transform.position = spawnPointPC.transform.position;
     }
 }

@@ -12,7 +12,7 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
-            PhotonNetwork.Instantiate("Player", spawnPoint1.transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate("Player", spawnPoint1.transform.position, spawnPoint1.transform.rotation);
             GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().enabled = true;
         }
         else

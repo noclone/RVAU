@@ -68,16 +68,9 @@ public class Navigation : MonoBehaviour
                                                      rightController.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton,
                                                          out bool rightSecondaryButtonPressed) && rightSecondaryButtonPressed)))
             && !isJumping)
-        {
-
-            int rnd = Random.Range(0, 2);
-            rnd = 1;
-            if (rnd == 0)
-                GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadTextMiniGame();
-            else if (rnd == 1)
-                GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadColorMiniGame();
-            Jump();
-        }
+            {
+                Jump();
+            }
 
         if (isMovingLateral)
         {
@@ -148,7 +141,10 @@ public class Navigation : MonoBehaviour
             animator.SetBool("isHitting", true);
             Rigidbody.velocity = new Vector3(0, 0, 0);
             FindObjectOfType<GameEngine>().EndGame();
+
+            GameObject.Find("Player(Clone)").GetComponent<NavigationPC>().StopMoving();
         }
+
     }
 
     public void ResetAll()

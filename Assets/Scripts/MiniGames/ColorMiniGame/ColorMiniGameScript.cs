@@ -33,6 +33,7 @@ public class ColorMiniGameScript : MonoBehaviour
             GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
             Camera camera = playerPC.GetComponent<Camera>();
             Canvas canvas = canvasPC.GetComponent<Canvas>();
+            playerPC.GetComponent<NavigationPC>().enabled = false;
             canvas.worldCamera = camera;
             canvasPC.SetActive(true);
         }
