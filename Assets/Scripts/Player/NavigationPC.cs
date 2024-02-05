@@ -8,6 +8,7 @@ public class NavigationPC : MonoBehaviour
     public float walkingSpeed = 5.0f;
     private bool isMovingForward = false;
     private float startTime;
+    private bool started = false;
 
     void Start()
     {
@@ -17,9 +18,10 @@ public class NavigationPC : MonoBehaviour
 
     void Update()
     {
-        if (!isMovingForward && Time.time - startTime > 1.5f)
+        if (!started && Time.time - startTime > 1.5f)
         {
             isMovingForward = true;
+            started = true;
         }
 
         if (isMovingForward)
