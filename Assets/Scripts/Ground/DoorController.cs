@@ -26,14 +26,14 @@ public class DoorController : MonoBehaviour
     private void HideObstacles(bool state)
     {
         if (PhotonNetwork.IsMasterClient)
+        {
+            GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().spawnSection();
             return;
-        
+        }
         GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         foreach (GameObject obstacle in obstacles)
         {
             obstacle.GetComponent<MeshRenderer>().enabled = state;
         }
-
-        GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().spawnSection();
     }
 }
