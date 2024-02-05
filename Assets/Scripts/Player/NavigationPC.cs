@@ -24,6 +24,26 @@ public class NavigationPC : MonoBehaviour
             started = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            walkingSpeed = 15.0f;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            walkingSpeed = -8.0f;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            walkingSpeed = 8.0f;
+        }
+
+        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            walkingSpeed = 0.0f;
+        }
+
         if (isMovingForward)
             MoveForward();
     }
