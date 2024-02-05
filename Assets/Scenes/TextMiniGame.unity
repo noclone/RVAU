@@ -2161,7 +2161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &624355938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3438,6 +3438,7 @@ MonoBehaviour:
   inputField: {fileID: 2027408144}
   submitButton: {fileID: 1657749711}
   errorText: {fileID: 462394435}
+  EventSystem: {fileID: 379191124}
 --- !u!1 &1063618484
 GameObject:
   m_ObjectHideFlags: 0

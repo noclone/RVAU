@@ -26,6 +26,7 @@ public class TextMiniGameEngine : MonoBehaviour
     public TMP_InputField inputField;
     public Button submitButton;
     public GameObject errorText;
+    public GameObject EventSystem;
 
     private String[] possibleWords = new[]
     {
@@ -71,8 +72,7 @@ public class TextMiniGameEngine : MonoBehaviour
         if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
             GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
-            GameObject eventSystem = GameObject.Find("EventSystem");
-            eventSystem.GetComponent<XRUIInputModule>().enabled = false;
+            EventSystem.GetComponent<XRUIInputModule>().enabled = false;
             Camera camera = playerPC.GetComponent<Camera>();
             Canvas canvas = canvasPC.GetComponent<Canvas>();
             canvas.worldCamera = camera;
