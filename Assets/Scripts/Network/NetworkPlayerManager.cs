@@ -14,11 +14,17 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.Instantiate("Player", spawnPoint1.transform.position, spawnPoint1.transform.rotation);
             GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().enabled = true;
-        }
-        else
-        {
-            PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
+            
+            PhotonView.Get(this).RPC("InstantiatePlayerVR", RpcTarget.AllBuffered);
         }
         GameObject.Find("GameEngine").GetComponent<GameEngine>().StartGame();
+    }
+    
+    [PunRPC]
+    public void InstantiatePlayerVR()
+    {
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
+            return;
+        PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
     }
 }

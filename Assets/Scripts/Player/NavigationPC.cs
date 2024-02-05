@@ -18,7 +18,7 @@ public class NavigationPC : MonoBehaviour
 
     void Update()
     {
-        if (!started && Time.time - startTime > 0.75f)
+        if (!started && Time.time - startTime > 1.5f)
         {
             isMovingForward = true;
             started = true;
