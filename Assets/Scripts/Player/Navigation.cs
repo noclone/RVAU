@@ -69,6 +69,13 @@ public class Navigation : MonoBehaviour
                                                          out bool rightSecondaryButtonPressed) && rightSecondaryButtonPressed)))
             && !isJumping)
         {
+
+            int rnd = Random.Range(0, 2);
+            rnd = 1;
+            if (rnd == 0)
+                GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadTextMiniGame();
+            else if (rnd == 1)
+                GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadColorMiniGame();
             Jump();
         }
 

@@ -58,11 +58,9 @@ public class ColorMiniGameScript : MonoBehaviour
     {
         if (!isLoaded)
             return;
-
-        CheckVictoryConditions();
     }
 
-    void CheckVictoryConditions()
+    public void CheckVictoryConditions()
     {
         bool gameVictory = true;
         for (int i = 0; i < solutionColorPlacement.Length; i++)
