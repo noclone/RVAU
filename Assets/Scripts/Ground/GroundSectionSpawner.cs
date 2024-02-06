@@ -9,7 +9,9 @@ public class GroundSectionSpawner : MonoBehaviourPunCallbacks
     void Start()
     {
         nextSpawnPoint = new Vector3(0, 0, 25);
-        SpawnStartSections();
+
+        if (PhotonNetwork.IsMasterClient)
+            ResetAll();
     }
 
     public void spawnSection()

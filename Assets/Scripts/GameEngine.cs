@@ -67,16 +67,28 @@ public class GameEngine : MonoBehaviour
             GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().ResetAll();
         photonView.RPC("RPC_RestartGame", RpcTarget.All);
     }
-
+    
     public void LoadColorMiniGame()
     {
         photonView.RPC("RPC_LoadColorMiniGame", RpcTarget.All);
+    }
+    
+    public void LoadTextMiniGame()
+    {
+        photonView.RPC("RPC_LoadTextMiniGame", RpcTarget.All);
     }
 
     [PunRPC]
     private void RPC_LoadColorMiniGame()
     {
-        PhotonNetwork.LoadLevel("MiniGame");
+        PhotonNetwork.LoadLevel("ColorMiniGame");
+    }
+    
+    
+    [PunRPC]
+    private void RPC_LoadTextMiniGame()
+    {
+        PhotonNetwork.LoadLevel("TextMiniGame");
     }
 
     [PunRPC]
@@ -87,8 +99,10 @@ public class GameEngine : MonoBehaviour
         score = 0;
 
         GameObject playerVR = GameObject.Find("PlayerVR(Clone)");
+        GameObject playerPC = GameObject.Find("Player(Clone)");
         playerVR.transform.position = spawnPointVR.transform.position;
         playerVR.GetComponent<Navigation>().ResetAll();
+        playerPC.GetComponent<NavigationPC>().ResetAll();
         GameObject.Find("Player(Clone)").transform.position = spawnPointPC.transform.position;
     }
 }

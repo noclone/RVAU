@@ -26,5 +26,6 @@ public class ColoredButtons : MonoBehaviour
             colorList = gameScript.solutionColors;
         button.image.color = new Color(colorList[currentColorIndex].r, colorList[currentColorIndex].g, colorList[currentColorIndex].b);
         currentColorIndex = (currentColorIndex + 1) % colorList.Length;
+        GameObject.Find("ScriptHolder").GetComponent<ColorMiniGameScript>().CheckVictoryConditions();
     }
 }

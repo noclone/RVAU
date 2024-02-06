@@ -10,22 +10,20 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
     public GameObject spawnPoint1;
     public GameObject spawnPoint2;
     private Scene currentScene;
-    
+
     void Start()
     {
 
         currentScene = SceneManager.GetActiveScene();
-    
+
         // To be removed
         PhotonNetwork.ConnectUsingSettings();
         if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
         {
-            PhotonNetwork.Instantiate("Player", spawnPoint1.transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate("Player", spawnPoint1.transform.position, spawnPoint1.transform.rotation);
             GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().enabled = true;
-        }
-        else
-        {
-            PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
+
+            PhotonView.Get(this).RPC("InstantiatePlayerVR", RpcTarget.AllBuffered);
         }
     }
 
@@ -37,8 +35,8 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
 
         if (scene.name != "Game")
         {
-            GameObject canvasVR = GameObject.Find("CanvasVR"); 
-            GameObject canvasPC = GameObject.Find("CanvasPC"); 
+            GameObject canvasVR = GameObject.Find("CanvasVR");
+            GameObject canvasPC = GameObject.Find("CanvasPC");
             if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
             {
                 canvasVR.SetActive(false);
@@ -63,6 +61,14 @@ public class NetworkPlayerManager : MonoBehaviourPunCallbacks
     // To be removed
     public override void OnJoinedRoom()
     {
+        PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
+    }
+
+    [PunRPC]
+    public void InstantiatePlayerVR()
+    {
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
+            return;
         PhotonNetwork.Instantiate("PlayerVR", spawnPoint2.transform.position, Quaternion.identity);
     }
 }

@@ -8,9 +8,4 @@ public class GroundSection : MonoBehaviour
     {
         groundSectionSpawner = FindObjectOfType<GroundSectionSpawner>();
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadColorMiniGame();
-    }
 }

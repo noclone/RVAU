@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
-using UnityEngine.XR.Interaction.Toolkit;
+using XRController = UnityEngine.XR.Interaction.Toolkit.XRController;
+using Photon.Pun;
 
 public class Navigation : MonoBehaviour
 {
@@ -67,9 +69,9 @@ public class Navigation : MonoBehaviour
                                                      rightController.inputDevice.TryGetFeatureValue(CommonUsages.secondaryButton,
                                                          out bool rightSecondaryButtonPressed) && rightSecondaryButtonPressed)))
             && !isJumping)
-        {
-            Jump();
-        }
+            {
+                Jump();
+            }
 
         if (isMovingLateral)
         {
@@ -134,13 +136,21 @@ public class Navigation : MonoBehaviour
             animator.SetBool("isJumping", false);
         }
 
-        if (other.gameObject.CompareTag("Obstacle"))
+        if (other.gameObject.CompareTag("Obstacle") || other.gameObject.CompareTag("Wall"))
         {
             isMovingForward = false;
             animator.SetBool("isHitting", true);
             Rigidbody.velocity = new Vector3(0, 0, 0);
             FindObjectOfType<GameEngine>().EndGame();
+
+            PhotonView.Get(this).RPC("StopPCPlayer", RpcTarget.All);
         }
+    }
+
+    [PunRPC]
+    private void StopPCPlayer()
+    {
+        GameObject.Find("Player(Clone)").GetComponent<NavigationPC>().StopMoving();
     }
 
     public void ResetAll()
