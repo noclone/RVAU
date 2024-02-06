@@ -81,13 +81,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (bulbs.All(b => b.isOn))
-            PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
-    }
-
     [PunRPC]
     void SetVictory()
     {
@@ -104,12 +97,12 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void RPC_Toggle(int buttonId)
     {
-        Debug.Log("Toggling button " + buttonId + "!");
-        Debug.Log("Count: " + buttonMapping.Count);
         int bulbIndex = buttonMapping[buttonId];
         foreach (Bulb bulb in bulbs) {
             if (bulb.transform.position.x == bulbs[bulbIndex].transform.position.x || bulb.transform.position.y == bulbs[bulbIndex].transform.position.y)
                 bulb.Toggle();
         }
+        if (bulbs.All(b => b.isOn))
+            PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
     }
 }
