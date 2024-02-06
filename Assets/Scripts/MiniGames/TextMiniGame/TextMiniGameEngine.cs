@@ -27,6 +27,10 @@ public class TextMiniGameEngine : MonoBehaviour
     public TMP_InputField inputField;
     public Button submitButton;
     public GameObject errorText;
+    public TextMeshProUGUI scoreText;
+    private int score;
+    private float scoreIncrementInterval = 0.1f;
+    private float timer;
 
     private String[] possibleWords = new[]
     {
@@ -77,6 +81,11 @@ public class TextMiniGameEngine : MonoBehaviour
             playerPC.GetComponent<NavigationPC>().enabled = false;
             canvas.worldCamera = camera;
             canvasPC.SetActive(true);
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("score", out object scoreValue))
+            {
+                score = (int)scoreValue;
+                UpdateScoreText();
+            }
         }
         else
         {
@@ -95,6 +104,11 @@ public class TextMiniGameEngine : MonoBehaviour
             InitializeSolutionWord();
         }
         submitButton.onClick.AddListener(CheckVictoryConditions);
+    }
+
+    private void UpdateScoreText()
+    {
+        scoreText.text = "Score: " + "<mspace=0.6em>" + score.ToString("D6");
     }
 
     private void InitializeSolutionWord()
@@ -133,13 +147,27 @@ public class TextMiniGameEngine : MonoBehaviour
             isDeactivated = true;
             eventSystem.GetComponent<XRUIInputModule>().enabled = false;
         }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            timer += Time.deltaTime;
+            if (timer >= scoreIncrementInterval)
+            {
+                score--;
+                UpdateScoreText();
+                timer = 0.0f;
+
+                ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
+                customProperties.Add("score", score);
+                PhotonNetwork.CurrentRoom.SetCustomProperties(customProperties);
+            }
+        }
     }
 
     void CheckVictoryConditions()
     {
         if (inputField.text == answerWord)
         {
-            // Set victory to true for all players
             PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
         }
         else

@@ -13,7 +13,7 @@ public class GameEngine : MonoBehaviour
 
     public float scoreIncrementInterval = 1.0f;
     private float timer;
-    private ulong score;
+    private int score;
     private bool isGameOver;
     private bool hasGameStarted;
 
@@ -22,7 +22,11 @@ public class GameEngine : MonoBehaviour
     void Start()
     {
         photonView = PhotonView.Get(this);
-        score = 0;
+        if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("score", out object scoreValue))
+        {
+            Debug.Log((int)scoreValue);
+            score = (int)scoreValue;
+        }
         UpdateScoreText();
     }
 
@@ -67,14 +71,23 @@ public class GameEngine : MonoBehaviour
             GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().ResetAll();
         photonView.RPC("RPC_RestartGame", RpcTarget.All);
     }
-    
+
+    private void SetProperties()
+    {
+        ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
+        customProperties.Add("score", score);
+        PhotonNetwork.CurrentRoom.SetCustomProperties(customProperties);
+    }
+
     public void LoadColorMiniGame()
     {
+        SetProperties();
         photonView.RPC("RPC_LoadColorMiniGame", RpcTarget.All);
     }
-    
+
     public void LoadTextMiniGame()
     {
+        SetProperties();
         photonView.RPC("RPC_LoadTextMiniGame", RpcTarget.All);
     }
 
@@ -83,8 +96,8 @@ public class GameEngine : MonoBehaviour
     {
         PhotonNetwork.LoadLevel("ColorMiniGame");
     }
-    
-    
+
+
     [PunRPC]
     private void RPC_LoadTextMiniGame()
     {

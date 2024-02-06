@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 public class ColorMiniGameScript : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class ColorMiniGameScript : MonoBehaviour
     private string colorButtonTag = "ColorButton";
     private bool victory = false;
     private bool isLoaded;
+    public TextMeshProUGUI scoreText;
+    private int score;
+    private float scoreIncrementInterval = 1f;
+    private float timer;
 
     public GameObject spawnPointPC;
     public GameObject spawnPointVR;
@@ -36,6 +41,11 @@ public class ColorMiniGameScript : MonoBehaviour
             playerPC.GetComponent<NavigationPC>().enabled = false;
             canvas.worldCamera = camera;
             canvasPC.SetActive(true);
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("score", out object scoreValue))
+            {
+                score = (int)scoreValue;
+                UpdateScoreText();
+            }
         }
         else
         {
@@ -55,10 +65,30 @@ public class ColorMiniGameScript : MonoBehaviour
         }
     }
 
+    private void UpdateScoreText()
+    {
+        scoreText.text = "Score: " + "<mspace=0.6em>" + score.ToString("D6");
+    }
+
     void Update()
     {
         if (!isLoaded)
             return;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            timer += Time.deltaTime;
+            if (timer >= scoreIncrementInterval)
+            {
+                score--;
+                UpdateScoreText();
+                timer = 0.0f;
+
+                ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
+                customProperties.Add("score", score);
+                PhotonNetwork.CurrentRoom.SetCustomProperties(customProperties);
+            }
+        }
     }
 
     public void CheckVictoryConditions()
