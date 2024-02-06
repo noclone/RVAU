@@ -67,15 +67,20 @@ public class GameEngine : MonoBehaviour
             GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().ResetAll();
         photonView.RPC("RPC_RestartGame", RpcTarget.All);
     }
-    
+
     public void LoadColorMiniGame()
     {
         photonView.RPC("RPC_LoadColorMiniGame", RpcTarget.All);
     }
-    
+
     public void LoadTextMiniGame()
     {
         photonView.RPC("RPC_LoadTextMiniGame", RpcTarget.All);
+    }
+
+    public void LoadLightMiniGame()
+    {
+        photonView.RPC("RPC_LoadLightMiniGame", RpcTarget.All);
     }
 
     [PunRPC]
@@ -83,12 +88,18 @@ public class GameEngine : MonoBehaviour
     {
         PhotonNetwork.LoadLevel("ColorMiniGame");
     }
-    
-    
+
+
     [PunRPC]
     private void RPC_LoadTextMiniGame()
     {
         PhotonNetwork.LoadLevel("TextMiniGame");
+    }
+
+    [PunRPC]
+    private void RPC_LoadLightMiniGame()
+    {
+        PhotonNetwork.LoadLevel("BulbsChallenge");
     }
 
     [PunRPC]

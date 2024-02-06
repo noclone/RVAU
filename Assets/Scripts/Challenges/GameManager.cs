@@ -21,61 +21,71 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
-        // {
-        //     GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
-        //     Camera camera = playerPC.GetComponent<Camera>();
-        //     Canvas canvas = canvasPC.GetComponent<Canvas>();
-        //     canvas.worldCamera = camera;
-        //     canvasPC.SetActive(true);
-        // }
-        // else
-        // {
-        //     GameObject playerVR = PhotonNetwork.Instantiate("PlayerVR", spawnPointVR.transform.position, Quaternion.identity);
-        //     playerVR.transform.GetChild(1).gameObject.SetActive(false);
-        //     playerVR.GetComponent<Rigidbody>().useGravity = false;
-        //     playerVR.GetComponent<Navigation>().enabled = false;
-        //     Camera camera = playerVR.GetComponent<Camera>();
-        //     Canvas canvas = canvasVR.GetComponent<Canvas>();
-        //     canvas.worldCamera = camera;
-        //     canvasVR.SetActive(true);
-        // }
+        if (PhotonNetwork.LocalPlayer.ActorNumber == 1)
+        {
+            GameObject playerPC = PhotonNetwork.Instantiate("Player", spawnPointPC.transform.position, Quaternion.identity);
+            Camera camera = playerPC.GetComponent<Camera>();
+            Canvas canvas = canvasPC.GetComponent<Canvas>();
+            canvas.worldCamera = camera;
+            playerPC.GetComponent<NavigationPC>().enabled = false;
+            canvasVR.SetActive(false);
+            canvasPC.SetActive(true);
+        }
+        else
+        {
+            GameObject playerVR = PhotonNetwork.Instantiate("PlayerVR", spawnPointVR.transform.position, Quaternion.identity);
+            playerVR.transform.GetChild(1).gameObject.SetActive(false);
+            playerVR.GetComponent<Rigidbody>().useGravity = false;
+            Camera camera = playerVR.GetComponent<Camera>();
+            Canvas canvas = canvasVR.GetComponent<Canvas>();
+            playerVR.GetComponent<Navigation>().enabled = false;
+            canvas.worldCamera = camera;
+            canvasVR.SetActive(true);
+            canvasPC.SetActive(false);
+        }
+        GameObject.Find("GameManager").GetComponent<GameManager>().enabled = true;
 
-        // if (PhotonNetwork.IsMasterClient)
-        // {
-            instance = this;
-            buttonMapping = new List<int> {};
+        instance = this;
+        buttonMapping = new List<int> {};
 
-            System.Random random = new System.Random();
+        System.Random random = new System.Random();
 
-            int count = 0;
+        bool changed = false;
 
-            for (int i = 0; i < buttons.Count; i++)
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            Debug.Log("Button: " + i + " Button ID: " + buttons[i].id);
+
+            int randomIndex;
+
+            do
             {
-                int randomIndex;
+                randomIndex = random.Next(0, bulbs.Count);
+            } while (buttonMapping.Contains(randomIndex));
 
-                do
-                {
-                    randomIndex = random.Next(0, bulbs.Count);
-                } while (buttonMapping.Contains(randomIndex));
+            buttonMapping.Add(randomIndex);
+        }
 
-                buttonMapping.Add(randomIndex);
-
-                if (random.Next(0, 2) == 0 || (count == 0 && i == buttons.Count - 1)) {
-                    RPC_Toggle(buttons[i].GetInstanceID());
-                    ++count;
-                }
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (random.Next(0, 2) == 0)
+            {
+                RPC_Toggle(buttons[i].id);
+                changed = true;
             }
-       //}
+        }
+
+        if (!changed)
+        {
+            RPC_Toggle(buttons[random.Next(0, buttons.Count)].id);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (PhotonNetwork.IsMasterClient)
-            if (bulbs.All(b => b.isOn))
-                PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
-        // }
+        if (bulbs.All(b => b.isOn))
+            PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -94,8 +104,9 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void RPC_Toggle(int buttonId)
     {
+        Debug.Log("Toggling button " + buttonId + "!");
+        Debug.Log("Count: " + buttonMapping.Count);
         int bulbIndex = buttonMapping[buttonId];
-
         foreach (Bulb bulb in bulbs) {
             if (bulb.transform.position.x == bulbs[bulbIndex].transform.position.x || bulb.transform.position.y == bulbs[bulbIndex].transform.position.y)
                 bulb.Toggle();
