@@ -93,6 +93,8 @@ public class TextMiniGameEngine : MonoBehaviour
             playerVR.transform.GetChild(1).gameObject.SetActive(false);
             playerVR.GetComponent<Rigidbody>().useGravity = false;
             playerVR.GetComponent<Navigation>().enabled = false;
+            playerVR.transform.GetChild(0).GetChild(1).GetComponent<LaserPointer>().enabled = true;
+            playerVR.transform.GetChild(0).GetChild(2).GetComponent<LaserPointer>().enabled = true;
             Camera camera = playerVR.GetComponent<Camera>();
             Canvas canvas = canvasVR.GetComponent<Canvas>();
             canvas.worldCamera = camera;
