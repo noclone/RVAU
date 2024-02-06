@@ -45,6 +45,7 @@ MonoBehaviour:
   - LoadColorMiniGame
   - RPC_LoadColorMiniGame
   - RPC_RestartGame
+  - Toggle
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

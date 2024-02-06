@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject spawnPointVR;
     public GameObject canvasPC;
     public GameObject canvasVR;
+    public List<Bulb> bulbs;
+    public List<Switch> switches;
     
-    private List<Bulb> bulbs;
-    private List<Switch> switches;
     private List<int> switchMapping;
 
     // Start is called before the first frame update
@@ -44,9 +44,6 @@ public class GameManager : MonoBehaviour
         // if (PhotonNetwork.IsMasterClient)
         // {
             instance = this;
-
-            bulbs = FindObjectsOfType<Bulb>().ToList();
-            switches = FindObjectsOfType<Switch>().ToList();
             switchMapping = new List<int> {};
 
             System.Random random = new System.Random();
@@ -69,13 +66,13 @@ public class GameManager : MonoBehaviour
                     ++count;
                 }
             }
-       // }
+       //}
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (PhotonNetwork.IsMasterClient) {
+        // if (PhotonNetwork.IsMasterClient)
             if (bulbs.All(b => b.isOn))
                 PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
         // }
