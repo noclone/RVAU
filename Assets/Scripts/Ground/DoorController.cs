@@ -14,7 +14,7 @@ public class DoorController : MonoBehaviour
             if (!PhotonNetwork.IsMasterClient)
             {
                 HideObstacles(true);
-                int rnd = Random.Range(0, 3);
+                int rnd = Random.Range(0, 4);
                 rnd = 2;
                 if (rnd == 0)
                     GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadTextMiniGame();
@@ -25,6 +25,8 @@ public class DoorController : MonoBehaviour
                     HideObstacles(false);
                     PhotonView.Get(this).RPC("GenerateNextSection", RpcTarget.AllBuffered);
                 }
+                else if (rnd == 3)
+                    GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadLightMiniGame();
             }
         }
     }
@@ -32,10 +34,8 @@ public class DoorController : MonoBehaviour
     [PunRPC]
     public void GenerateNextSection()
     {
-        Debug.Log("Generating next section out");
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("Generating next section in if");
             GameObject.Find("GroundSectionSpawner").GetComponent<GroundSectionSpawner>().spawnSection();
         }
     }

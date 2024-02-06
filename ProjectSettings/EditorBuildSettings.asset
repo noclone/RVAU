@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/ColorMiniGame.unity
     guid: 25ef89b0bd8cd6b4a9d175f5598b8551
   - enabled: 1
-    path: Assets/Scenes/TextMiniGame.unity
-    guid: 03cf66c7c033d7748a77dba6120f594d
+    path: Assets/Scenes/BulbsChallenge.unity
+    guid: fdd6e106c4a41b64484231bd8fe79563
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 9865a161bf3cd084faed0e7fc18d16be, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a498e9d6233fe2342a62abc995d4334b, type: 2}

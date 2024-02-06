@@ -72,6 +72,7 @@ public class GameEngine : MonoBehaviour
         photonView.RPC("RPC_RestartGame", RpcTarget.All);
     }
 
+
     private void SetProperties()
     {
         ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
@@ -91,6 +92,11 @@ public class GameEngine : MonoBehaviour
         photonView.RPC("RPC_LoadTextMiniGame", RpcTarget.All);
     }
 
+    public void LoadLightMiniGame()
+    {
+        photonView.RPC("RPC_LoadLightMiniGame", RpcTarget.All);
+    }
+
     [PunRPC]
     private void RPC_LoadColorMiniGame()
     {
@@ -102,6 +108,12 @@ public class GameEngine : MonoBehaviour
     private void RPC_LoadTextMiniGame()
     {
         PhotonNetwork.LoadLevel("TextMiniGame");
+    }
+
+    [PunRPC]
+    private void RPC_LoadLightMiniGame()
+    {
+        PhotonNetwork.LoadLevel("BulbsChallenge");
     }
 
     [PunRPC]
