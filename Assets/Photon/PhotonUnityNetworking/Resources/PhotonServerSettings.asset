@@ -52,6 +52,7 @@ MonoBehaviour:
   - RPC_LoadTextMiniGame
   - StopPCPlayer
   - RPC_Toggle
+  - RPC_LoadLightMiniGame
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
