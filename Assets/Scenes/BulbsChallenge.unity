@@ -615,6 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1720011976}
+  id: 2
 --- !u!54 &486914658
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -714,6 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1359663591}
+  id: 3
 --- !u!54 &488975754
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2316,6 +2318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 954034619}
+  id: 0
 --- !u!54 &1454197193
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3161,6 +3164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 692737577}
+  id: 1
 --- !u!54 &2047436901
 Rigidbody:
   m_ObjectHideFlags: 0

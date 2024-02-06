@@ -9,6 +9,7 @@ public class ButtonVR : MonoBehaviour
 {
     public GameObject button;
     bool isPressed;
+    public int id;
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class ButtonVR : MonoBehaviour
 
     public void ButtonPress()
     {
-        GameObject.Find("GameManager").GetComponent<GameManager>().Toggle(GetInstanceID());
+        GameObject.Find("GameManager").GetComponent<GameManager>().Toggle(id);
         if (!isPressed)
         {
             button.transform.Translate(Vector3.down * 0.1f);

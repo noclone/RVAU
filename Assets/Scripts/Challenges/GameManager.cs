@@ -94,8 +94,7 @@ public class GameManager : MonoBehaviour
     [PunRPC]
     public void RPC_Toggle(int buttonId)
     {
-        int index = buttons.FindIndex(s => s.GetInstanceID() == buttonId);
-        int bulbIndex = buttonMapping[index];
+        int bulbIndex = buttonMapping[buttonId];
 
         foreach (Bulb bulb in bulbs) {
             if (bulb.transform.position.x == bulbs[bulbIndex].transform.position.x || bulb.transform.position.y == bulbs[bulbIndex].transform.position.y)
