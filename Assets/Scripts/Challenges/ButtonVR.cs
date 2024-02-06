@@ -8,42 +8,27 @@ using Photon.Pun;
 public class ButtonVR : MonoBehaviour
 {
     public GameObject button;
-    public UnityEvent onPress;
-    public UnityEvent onRelease;
-    
-    GameObject presser;
-    bool isPressed = false;
+    bool isPressed;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         isPressed = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void ButtonPress()
     {
+        GameObject.Find("GameManager").GetComponent<GameManager>().Toggle(GetInstanceID());
         if (!isPressed)
         {
             button.transform.Translate(Vector3.down * 0.1f);
-            presser = other.gameObject;
-            onPress.Invoke();
+            button.GetComponent<MeshRenderer>().material.color = Color.green;
             isPressed = true;
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (presser == other.gameObject)
+        else
         {
             button.transform.Translate(Vector3.up * 0.1f);
-            onRelease.Invoke();
+            button.GetComponent<MeshRenderer>().material.color = Color.red;
             isPressed = false;
         }
-    }
-
-    public void ButtonPress()
-    {
-        PhotonView.Get(this).RPC("GameManager.instance.Toggle", RpcTarget.AllBuffered, this.GetInstanceID());
     }
 }

@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject canvasVR;
     public List<Bulb> bulbs;
     public List<ButtonVR> buttons;
-    
+
     private List<int> buttonMapping;
 
     // Start is called before the first frame update
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
                 buttonMapping.Add(randomIndex);
 
                 if (random.Next(0, 2) == 0 || (count == 0 && i == buttons.Count - 1)) {
-                    Toggle(buttons[i].GetInstanceID());
+                    RPC_Toggle(buttons[i].GetInstanceID());
                     ++count;
                 }
             }
@@ -85,8 +85,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    [PunRPC]
     public void Toggle(int buttonId)
+    {
+        PhotonView.Get(this).RPC("RPC_Toggle", RpcTarget.AllBuffered, buttonId);
+    }
+
+
+    [PunRPC]
+    public void RPC_Toggle(int buttonId)
     {
         int index = buttons.FindIndex(s => s.GetInstanceID() == buttonId);
         int bulbIndex = buttonMapping[index];
