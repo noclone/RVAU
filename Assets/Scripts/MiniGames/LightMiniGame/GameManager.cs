@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < buttons.Count; i++)
         {
-            Debug.Log("Button: " + i + " Button ID: " + buttons[i].id);
 
             int randomIndex;
 
