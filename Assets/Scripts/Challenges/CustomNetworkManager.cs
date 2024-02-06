@@ -41,6 +41,7 @@ public class CustomNetworkPlayerManager : MonoBehaviourPunCallbacks
             Camera camera = playerPC.GetComponent<Camera>();
             Canvas canvas = canvasPC.GetComponent<Canvas>();
             canvas.worldCamera = camera;
+            playerPC.GetComponent<NavigationPC>().enabled = false;
             canvasVR.SetActive(false);
             canvasPC.SetActive(true);
         }
@@ -51,6 +52,7 @@ public class CustomNetworkPlayerManager : MonoBehaviourPunCallbacks
             playerVR.GetComponent<Rigidbody>().useGravity = false;
             Camera camera = playerVR.GetComponent<Camera>();
             Canvas canvas = canvasVR.GetComponent<Canvas>();
+            playerVR.GetComponent<Navigation>().enabled = false;
             canvas.worldCamera = camera;
             canvasVR.SetActive(true);
             canvasPC.SetActive(false);
