@@ -42,13 +42,18 @@ public class CustomNetworkPlayerManager : MonoBehaviourPunCallbacks
             Canvas canvas = canvasPC.GetComponent<Canvas>();
             canvas.worldCamera = camera;
             canvasVR.SetActive(false);
+            canvasPC.SetActive(true);
         }
         else
         {
             GameObject playerVR = PhotonNetwork.Instantiate("PlayerVR", spawnPointVR.transform.position, Quaternion.identity);
+            playerVR.transform.GetChild(1).gameObject.SetActive(false);
+            playerVR.GetComponent<Rigidbody>().useGravity = false;
             Camera camera = playerVR.GetComponent<Camera>();
             Canvas canvas = canvasVR.GetComponent<Canvas>();
             canvas.worldCamera = camera;
+            canvasVR.SetActive(true);
+            canvasPC.SetActive(false);
         }
         GameObject.Find("GameManager").GetComponent<GameManager>().enabled = true;
     }
