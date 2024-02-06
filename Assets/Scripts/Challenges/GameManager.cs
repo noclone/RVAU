@@ -14,9 +14,9 @@ public class GameManager : MonoBehaviour
     public GameObject canvasPC;
     public GameObject canvasVR;
     public List<Bulb> bulbs;
-    public List<Switch> switches;
+    public List<ButtonVR> buttons;
     
-    private List<int> switchMapping;
+    private List<int> buttonMapping;
 
     // Start is called before the first frame update
     void Start()
@@ -44,25 +44,25 @@ public class GameManager : MonoBehaviour
         // if (PhotonNetwork.IsMasterClient)
         // {
             instance = this;
-            switchMapping = new List<int> {};
+            buttonMapping = new List<int> {};
 
             System.Random random = new System.Random();
 
             int count = 0;
 
-            for (int i = 0; i < switches.Count; i++)
+            for (int i = 0; i < buttons.Count; i++)
             {
                 int randomIndex;
 
                 do
                 {
                     randomIndex = random.Next(0, bulbs.Count);
-                } while (switchMapping.Contains(randomIndex));
+                } while (buttonMapping.Contains(randomIndex));
 
-                switchMapping.Add(randomIndex);
+                buttonMapping.Add(randomIndex);
 
-                if (random.Next(0, 2) == 0 || (count == 0 && i == switches.Count - 1)) {
-                    Toggle(switches[i].GetInstanceID());
+                if (random.Next(0, 2) == 0 || (count == 0 && i == buttons.Count - 1)) {
+                    Toggle(buttons[i].GetInstanceID());
                     ++count;
                 }
             }
@@ -86,10 +86,10 @@ public class GameManager : MonoBehaviour
 
 
     [PunRPC]
-    public void Toggle(int switchId)
+    public void Toggle(int buttonId)
     {
-        int index = switches.FindIndex(s => s.GetInstanceID() == switchId);
-        int bulbIndex = switchMapping[index];
+        int index = buttons.FindIndex(s => s.GetInstanceID() == buttonId);
+        int bulbIndex = buttonMapping[index];
 
         foreach (Bulb bulb in bulbs) {
             if (bulb.transform.position.x == bulbs[bulbIndex].transform.position.x || bulb.transform.position.y == bulbs[bulbIndex].transform.position.y)
