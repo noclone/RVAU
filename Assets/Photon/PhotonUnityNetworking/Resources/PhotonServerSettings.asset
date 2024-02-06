@@ -46,6 +46,11 @@ MonoBehaviour:
   - RPC_LoadColorMiniGame
   - RPC_RestartGame
   - Toggle
+  - GenerateNextSection
+  - InitSolutionWord
+  - InstantiatePlayerVR
+  - RPC_LoadTextMiniGame
+  - StopPCPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

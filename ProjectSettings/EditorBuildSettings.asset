@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Game.unity
     guid: 6b70e862f7b66554d805c228c3c702e2
   - enabled: 0
-    path: Assets/Scenes/MiniGame.unity
+    path: Assets/Scenes/ColorMiniGame.unity
     guid: 25ef89b0bd8cd6b4a9d175f5598b8551
   - enabled: 1
     path: Assets/Scenes/BulbsChallenge.unity
