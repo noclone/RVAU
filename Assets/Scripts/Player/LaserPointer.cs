@@ -37,9 +37,10 @@ public class LaserPointer : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
+            Debug.Log("Hit " + hit.collider.gameObject.name);
             if (hit.collider.gameObject.name == "Cover")
             {
-                Debug.Log("Hit " + hit.collider.gameObject.name);
+                Debug.Log("HERE");
                 Vector3 position = hit.collider.gameObject.transform.position;
                 hit.collider.gameObject.transform.position = new Vector3(position.x,
                     hit.transform.position.y, position.z);

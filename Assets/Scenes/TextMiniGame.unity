@@ -3417,7 +3417,7 @@ MonoBehaviour:
   initialWord: 
   spawnPointPC: {fileID: 1492325061}
   spawnPointVR: {fileID: 326185972}
-  canvasVR: {fileID: 0}
+  canvasVR: {fileID: 1270010091}
   canvasPC: {fileID: 624355937}
   initialWordText: {fileID: 1618939315}
   inputField: {fileID: 2027408144}
