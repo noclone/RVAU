@@ -15,7 +15,6 @@ public class DoorController : MonoBehaviour
             {
                 HideObstacles(true);
                 int rnd = Random.Range(0, 4);
-                rnd = 2;
                 if (rnd == 0)
                     GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadTextMiniGame();
                 else if (rnd == 1)
