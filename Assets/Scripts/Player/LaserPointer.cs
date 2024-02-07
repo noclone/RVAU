@@ -43,9 +43,14 @@ public class LaserPointer : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
+            Debug.Log("Hit something: " + hit.collider.name);
             if (hit.collider.CompareTag("Switch"))
             {
                 hit.collider.GetComponent<ButtonVR>().ButtonPress();
+            }
+            else if (hit.collider.gameObject.name == "Cover")
+            {
+                Debug.Log("Cover hit");
             }
         }
     }
