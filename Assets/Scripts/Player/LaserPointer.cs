@@ -49,7 +49,7 @@ public class LaserPointer : MonoBehaviour
             }
             if (hit.collider.gameObject.name == "Cover")
             {
-                hit.collider.gameObject.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.point.y, hit.collider.gameObject.transform.position.z);
+                hit.collider.gameObject.transform.position = new Vector3(hit.point.x, hit.point.y, hit.collider.gameObject.transform.position.z);
             }
         }
     }
