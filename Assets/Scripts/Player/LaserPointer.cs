@@ -23,7 +23,7 @@ public class LaserPointer : MonoBehaviour
 
         if (xrController.inputDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerPressed))
         {
-            if (triggerPressed && !triggerPressedLastFrame)
+            if (triggerPressed)
             {
                 HandleTriggerPress();
             }
@@ -43,9 +43,13 @@ public class LaserPointer : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
-            if (hit.collider.CompareTag("Switch"))
+            if (hit.collider.CompareTag("Switch") && !triggerPressedLastFrame)
             {
                 hit.collider.GetComponent<ButtonVR>().ButtonPress();
+            }
+            if (hit.collider.gameObject.name == "Cover")
+            {
+                hit.collider.gameObject.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.point.y, hit.collider.gameObject.transform.position.z);
             }
         }
     }
