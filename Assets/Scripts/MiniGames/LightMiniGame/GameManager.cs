@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +19,11 @@ public class GameManager : MonoBehaviour
     public List<ButtonVR> buttons;
 
     private List<int> buttonMapping;
+    
+    public TextMeshProUGUI scoreText;
+    private int score;
+    private float scoreIncrementInterval = 0.1f;
+    private float timer;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +37,11 @@ public class GameManager : MonoBehaviour
             playerPC.GetComponent<NavigationPC>().enabled = false;
             canvasVR.SetActive(false);
             canvasPC.SetActive(true);
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("score", out object scoreValue))
+            {
+                score = (int)scoreValue;
+                UpdateScoreText();
+            }
         }
         else
         {
@@ -79,6 +91,11 @@ public class GameManager : MonoBehaviour
             RPC_Toggle(buttons[random.Next(0, buttons.Count)].id);
         }
     }
+    
+    private void UpdateScoreText()
+    {
+        scoreText.text = "Score: " + "<mspace=0.6em>" + score.ToString("D6");
+    }
 
     [PunRPC]
     void SetVictory()
@@ -103,5 +120,23 @@ public class GameManager : MonoBehaviour
         }
         if (bulbs.All(b => b.isOn))
             PhotonView.Get(this).RPC("SetVictory", RpcTarget.AllBuffered);
+    }
+
+    void Update()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            timer += Time.deltaTime;
+            if (timer >= scoreIncrementInterval)
+            {
+                score--;
+                UpdateScoreText();
+                timer = 0.0f;
+
+                ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
+                customProperties.Add("score", score);
+                PhotonNetwork.CurrentRoom.SetCustomProperties(customProperties);
+            }
+        }
     }
 }
