@@ -2928,6 +2928,7 @@ MonoBehaviour:
   - {fileID: 486914657}
   - {fileID: 2047436900}
   - {fileID: 1454197192}
+  scoreText: {fileID: 1509350294}
 --- !u!4 &1735942965
 Transform:
   m_ObjectHideFlags: 0
