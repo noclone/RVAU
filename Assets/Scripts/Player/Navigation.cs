@@ -122,7 +122,7 @@ public class Navigation : MonoBehaviour
     }
     void Jump()
     {
-        GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadLightMiniGame();
+        GameObject.Find("GameEngine").GetComponent<GameEngine>().LoadTextMiniGame();
         animator.SetBool("isJumping", true);
         Rigidbody.velocity = new Vector3(Rigidbody.velocity.x, 0, Rigidbody.velocity.z);
         Rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);

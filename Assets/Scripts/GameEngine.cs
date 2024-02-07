@@ -24,7 +24,6 @@ public class GameEngine : MonoBehaviour
         photonView = PhotonView.Get(this);
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue("score", out object scoreValue))
         {
-            Debug.Log((int)scoreValue);
             score = (int)scoreValue;
         }
         UpdateScoreText();
